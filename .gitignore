@@ -2,4 +2,5 @@ config.json
 serverdata.json
 userdata.json
 node_modules/
+.idea/*
 

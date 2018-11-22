@@ -1,0 +1,20 @@
+{
+    "name": "minnie-marigold",
+    "version": "1.0.0",
+    "description": "Minnie Marigold",
+    "main": "minnie.js.js",
+    "author": "",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "bufferutil": "^3.0.5",
+        "discord.js": "^11.4.2",
+        "erlpack": "github:discordapp/erlpack",
+        "node-opus": "^0.2.9",
+        "opusscript": "0.0.6",
+        "uws": "^9.148.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rockythechao/minnie-marigold.git"
+    }
+}
