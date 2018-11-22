@@ -1,0 +1,553 @@
+{
+	"_example": {
+		"category": "this is used to sort the commands in the help post;  if not specified, the command will not be listed",
+		"function": "the name of the function to call;  defaults to sendResponse if not specified.  All functions pass in the message, command and additional text as arguments.",
+		"needsArgs": "if this field is defined at all, the command will fail if arguments aren't specified",
+		"info": "the text displayed when someone inputs /knux help [this command];  if this isn't specified, the bot will deny its existence",
+		"auth": "if this field is defined at all, only owner, server mods, and whitelisted users can use the command;  specify a group name defined in config.json's authIds to whitelist those members",
+		"cooldown": "cooldown before a given command can be reused by the same person",
+		"regex": "if this attribute is defined, the command can be initiated whenever a match is detected in other users' posts (generally don't use this with Minnie, okay?)",
+		"phrases": {
+			"all": [
+				"a table of possible responses",
+				"sendResponse will just choose one of these randomly and post it",
+				"other functions can make use of these as well.",
+				"all is the default category, other category names can be defined."
+			]
+		}
+	},
+
+
+	"help": {
+		"function": "callHelp",
+		"info": "How may this lovely lady be of assistance?"
+	},
+	"info": {
+		"function": "callHelp",
+		"info": "How may this lovely lady be of assistance?"
+	},
+	"cmd": {
+		"function": "callHelp",
+		"info": "How may this lovely lady be of assistance?"
+	},
+	"command": {
+		"function": "callHelp",
+		"info": "How may this lovely lady be of assistance"
+	},
+
+
+	"ping": {
+		"function": "ping"
+	},
+
+	"enter": {
+		"phrases": {
+			"all": [
+				"Everybody give it up for the marvelous Minnie!  Thank you, thank you, you're too kind!",
+				"Minnie in the house, ready to work her magic!",
+				"Iiiiiiiiiit's Minnie!",
+				"Minnie's here, now this party can really get started!",
+				"Get ready for a show the likes of which this world's never seen!  Minnie's BACK, baby!",
+				"In this world, it's dazzle or _bedazzle!_",
+				"owo what's this?  Starting the show without the main attraction?",
+				"Expecting someone else?  Too bad, MINNIE TIME!"
+			]
+		}
+	},
+
+	"exit": {
+		"phrases": {
+			"all": [
+				"It's been fun, but for now I must bid you all adieu!",
+				"Oh, look at the time! Toodles!",
+				"That's all the time we have tonight, thanks for being such a wonderful audience!",
+				"Now you see me, _now you don't!_"
+			]
+		}
+	},
+
+	"nocmd": {
+		"phrases": {
+			"all": [
+				"Sorry, sweetie, that's act's not in this girl's bag 'o tricks!",
+				"I'm a magician, not a miracle worker!",
+				"Erm, the only person I know who could do that is currently behind bars.",
+				"Look, I can do some pretty astounding stuff, but _that_. That right there. That's impossible.",
+				"Could you speak up?  I'm not sure I got that.",
+				"That didn't sound right... could you repeat your request?",
+				"Uhhhhhhh... what."
+			]
+		}
+	},
+
+	"decline": {
+		"phrases": {
+			"all": [
+				"No can do, darlin'!  This show's for all audiences~",
+				"Sorry, I just can't do that.  Not legally.",
+				"Preeeeetty sure what you're asking for is a breach of the magician's code...",
+				"My magic 8-ball says that would be a bad idea, so I think I'll pass!",
+				"I consulted the spirits and they advised against that.  Heavily.",
+				"Ohh, I would but, uh... I need my assistant for that!",
+				"I may use my magnificent powers for everyone's amazement, but they aren't toys!",
+				"Oh-ho-ho, nice try you cheeky devil~"
+			]
+		}
+	},
+
+	"noArgs": {
+		"phrases": {
+			"all": [
+				"You're gonna need to be more specific! <phrase moreSpecific>"
+			]
+		}
+	},
+
+	"moreSpecific": {
+		"phrases": {
+			"all": [
+				"I'm a magician, not a psychic!",
+				"How am I supposed to perform a trick without the tools of the trade?"
+			]
+		}
+	},
+
+
+	"quote": {
+		"category": "mod-only",
+		"info": "Quote a post (to verify I know it exists)",
+		"function": "quote",
+		"auth": "owner",
+		"needsArgs": "yes"
+	},
+
+	"cleanup": {
+		"categoory": "mod-only",
+		"infoo": "Bulk reaction removal.",
+		"function": "cleanupReactions",
+		"auth": "owner"
+	},
+
+	"cleanupSingle": {
+		"categoory": "mod-only",
+		"infoo": "Remove reactions from a single message.",
+		"function": "clearReactsOne",
+		"auth": "owner"
+	},
+
+	"tcleanup": {
+		"categoory": "mod-only",
+		"infoo": "Sets the trigger emoji for cleaning up reactions from a post.",
+		"function": "setCleanupTrigger",
+		"auth": "owner"
+	},
+
+	"error": {
+		"category": "general",
+		"info": "Triggers an error.",
+		"function": "forceError",
+		"phrases": {
+			"all": [
+				"Whoopsie, that's not supposed to happen!",
+				"Huh... well, even the best magicians make mistakes!",
+				"Yipes, that didn't turn out the way I hoped!",
+				"Uh, don't worry!  I can fix this... I think..."
+			]
+		}
+	},
+
+	"setgame": {
+		"category": "general",
+		"info": "Changes my 'Playing _' message.",
+		"function": "setGame"
+	},
+
+	"magic": {
+		"category": "general",
+		"info": "Hey everyone, wanna see a magic trick?",
+		"phrases": {
+			"all": [
+				"Please be patient, I'm still getting ready!",
+				"I don't have all of my equipment with me at the moment, maybe later?",
+				"Sorry, still working out a few kinks in my act!",
+				"Erm, now's not a good time.  The rabbits and doves are currently on strike."
+			]
+		}
+	},
+
+	"music": {
+		"category": "general",
+		"info": "Shares one of my fave songs at random.",
+		"phrases": {
+			"all": [
+				"<phrase needsMusic> <page> <phrase howAboutThis>\n<phrase musicTracks>"
+			]
+		}
+	},
+
+	"needsMusic": {
+		"phrases": {
+			"all": [
+				"Okay, let's get this show started!",
+				"Oooh, showtune time!",
+				"You wanna know what music I like, eh?",
+				"Time to spice things up a bit!",
+				"You're right, every good act needs some musical accompaniment!"
+			]
+		}
+	},
+
+	"howAboutThis": {
+		"phrases": {
+			"all": [
+				"Here's something that's been stuck in my head lately!",
+				"Hm, how's about this?",
+				"This tune's pretty catchy!",
+				"Ooh, this one's right up my alley!"
+			]
+		}
+	},
+
+	"musicTracks": {
+		"phrases": {
+			"all": [
+				"https://www.youtube.com/watch?v=F27Qk0CVXl8",
+				"https://www.youtube.com/watch?v=7F7WwjxyIg8",
+				"https://www.youtube.com/watch?v=y30ZVwIiRUY",
+				"https://www.youtube.com/watch?v=VV4y4uP6luA",
+				"https://www.youtube.com/watch?v=9Bd940BkxGY",
+				"https://www.youtube.com/watch?v=Z8aYGVMEo3A",
+				"https://www.youtube.com/watch?v=Z76SS6Bu6_w",
+				"https://www.youtube.com/watch?v=p6qLJIuAJ70",
+				"https://www.youtube.com/watch?v=6s4x8vxgR5M",
+				"https://www.youtube.com/watch?v=l_kf2Paca-4",
+				"https://www.youtube.com/watch?v=WAsqg0m3tgo",
+				"https://www.youtube.com/watch?v=JjndpVE-2pY",
+				"https://www.youtube.com/watch?v=PKSN8ZzOxzk",
+				"https://www.youtube.com/watch?v=UzC0MEDHcv4",
+				"https://www.youtube.com/watch?v=lKrAKxzAXsk",
+				"https://youtu.be/wa2K_8Ff41M?t=3m26s",
+				"https://www.youtube.com/watch?v=DuQN5R7Cc2Y",
+				"https://www.youtube.com/watch?v=xl-IBWv9FgQ",
+				"https://www.youtube.com/watch?v=urjym3MiWcg",
+				"https://www.youtube.com/watch?v=k10n-4I2MGI",
+				"https://www.youtube.com/watch?v=zWkCxrn5dTo",
+				"https://www.youtube.com/watch?v=mKHZQKx5acw",
+				"https://www.youtube.com/watch?v=jDjdTpQDydM",
+				"https://www.youtube.com/watch?v=SW8XDAwjw6c",
+				"https://www.youtube.com/watch?v=bSI1bWGu34s",
+				"https://www.youtube.com/watch?v=le9GTQLAPBA",
+				"https://www.youtube.com/watch?v=EHIfvQKYoCs",
+				"https://www.youtube.com/watch?v=COHV5_ABteA",
+				"https://www.youtube.com/watch?v=8posVKdswBY",
+				"https://www.youtube.com/watch?v=A6xC1KZDDFg",
+				"https://www.youtube.com/watch?v=2KLi0XqR_QE",
+				"https://www.youtube.com/watch?v=nLJyvX9PV1M",
+				"https://www.youtube.com/watch?v=7IApQKArrsw",
+				"https://www.youtube.com/watch?v=5KFh1jTZJPc",
+				"https://www.youtube.com/watch?v=04vrkyuVDoo",
+				"https://www.youtube.com/watch?v=iKnwVvXkWq0",
+				"https://www.youtube.com/watch?v=LPXM4WHiFx4",
+				"https://www.youtube.com/watch?v=ZnecBIPvTMU",
+				"https://www.youtube.com/watch?v=wHzYs162HSk",
+				"https://www.youtube.com/watch?v=MTSboHaAvEE",
+				"https://www.youtube.com/watch?v=lPK0qIJMIWk",
+				"https://www.youtube.com/watch?v=gMpMErF5zic",
+				"https://www.youtube.com/watch?v=y0Hu6sdA4UQ",
+				"https://www.youtube.com/watch?v=_lM2kDV6-mQ",
+				"https://www.youtube.com/watch?v=-L3pyN2fazA",
+				"https://www.youtube.com/watch?v=z-Q2zp-e5V8",
+				"https://www.youtube.com/watch?v=jpfAQxl83mQ",
+				"https://www.youtube.com/watch?v=BBtSp1EZdI8",
+				"https://www.youtube.com/watch?v=zLzTvn4U014",
+				"https://www.youtube.com/watch?v=avs0yOwJLKY",
+				"https://www.youtube.com/watch?v=VClTdPwCHzM",
+				"https://www.youtube.com/watch?v=7OzrAI66o-4",
+				"https://www.youtube.com/watch?v=a660fhaF08s",
+				"https://www.youtube.com/watch?v=Is1ilQkBLg8",
+				"https://www.youtube.com/watch?v=zp6W7dPT208",
+				"https://www.youtube.com/watch?v=VRUnjCzgr9U",
+				"https://www.youtube.com/watch?v=auWSVFxoDTg",
+				"https://www.youtube.com/watch?v=_u_76yAC5cc",
+				"https://www.youtube.com/watch?v=VnFrxEuNdno",
+				"https://www.youtube.com/watch?v=dIwAoEDkYjk",
+				"https://www.youtube.com/watch?v=oTQtKETqRtg",
+				"https://www.youtube.com/watch?v=sRkRsGtWxo8",
+				"https://www.youtube.com/watch?v=Nqg8XBM5um8",
+
+				"https://www.youtube.com/watch?v=g_kQ7jU5ZPQ",
+				"https://www.youtube.com/watch?v=VsZTBBz5ZO4",
+				"https://www.youtube.com/watch?v=wzLQG0Mkrt4",
+
+				"https://www.youtube.com/watch?v=bCN5-BiHb7s",
+				"https://www.youtube.com/watch?v=KP3DFYVsQN8",
+				"https://www.youtube.com/watch?v=UZC28SV_YT4",
+				"https://www.youtube.com/watch?v=9hA6M_z7fzc",
+				"https://www.youtube.com/watch?v=i1Znj26NVrM",
+				"https://www.youtube.com/watch?v=J9SIx8_B6Ek",
+				"https://www.youtube.com/watch?v=HCGAOjXXZD8",
+				"https://www.youtube.com/watch?v=iP5VzAc3i-A",
+				"https://www.youtube.com/watch?v=kU47Fj18p8U",
+				"https://www.youtube.com/watch?v=jCr7svvelyc",
+				"https://www.youtube.com/watch?v=FRZc7yZAvRQ",
+				"https://www.youtube.com/watch?v=Sds9Me67e0E",
+				"https://www.youtube.com/watch?v=HYnX5CXA-9M",
+				"https://www.youtube.com/watch?v=e-VPGPVUuM8",
+				"https://www.youtube.com/watch?v=_Ad2s7rKgbE",
+				"https://www.youtube.com/watch?v=CZ0ORvIgC2I",
+				"https://www.youtube.com/watch?v=SNi9RVyTwSs",
+				"https://www.youtube.com/watch?v=mcrA4lNgutE",
+				"https://www.youtube.com/watch?v=S6vV0CIAUgg",
+				"https://www.youtube.com/watch?v=NjMheEmcGgQ",
+				"https://www.youtube.com/watch?v=lw0fPa5hjhk",
+				"https://www.youtube.com/watch?v=upZAxeT416g",
+				"https://www.youtube.com/watch?v=2l0AwAAF2CU",
+				"https://www.youtube.com/watch?v=Ee06kROMzuQ",
+				"https://www.youtube.com/watch?v=OJKNl_CuNr8",
+				"https://www.youtube.com/watch?v=dSNFCzTRqKU",
+				"https://www.youtube.com/watch?v=XiE9Hy4qpvE",
+				"https://www.youtube.com/watch?v=900AzBnnhjU",
+				"https://www.youtube.com/watch?v=F1RevEIZ0Vs",
+				"https://www.youtube.com/watch?v=Dq20zg1dZ_w",
+				"https://www.youtube.com/watch?v=DwZX0-GCdWQ",
+				"https://www.youtube.com/watch?v=_-j5MtQvHEE",
+				"https://www.youtube.com/watch?v=Tg-oV3NoVQ8",
+				"https://www.youtube.com/watch?v=ERKnkHq-6XA",
+				"https://www.youtube.com/watch?v=Gkj2QeogAsU"
+			]
+		}
+	},
+
+
+	"thatRascal": {
+		"phrases": {
+			"all": [
+				"rascal",
+				"scamp",
+				"hooligan",
+				"scalawag",
+				"fiend",
+				"wacky",
+				"doof"
+			]
+		}
+	},
+
+	"aka": {
+		"phrases": {
+			"all": [
+				"A.K.A. ",
+				"or, as you may know them, ",
+				"who also goes by ",
+				"codename: ",
+				"in other words, ",
+				"or, the artist formerly known as ",
+				"who some of you may remember as "
+			]
+		}
+	},
+
+	"golden": {
+		"regex": "GOLDEN",
+		"phrases": {
+			"all": [
+				"http://www.goldensunrealm.com/images/gs/general/golden_sun_logo.png",
+				"https://thegarbagemanreviews.files.wordpress.com/2014/02/p4g_logo_clear.png",
+				"http://2.bp.blogspot.com/-6gKKGSyVUO0/U4FyLpjlbcI/AAAAAAAABdo/yCoj7eLpL64/s1600/ge007_n64_cart.png",
+				"http://img13.deviantart.net/6038/i/2013/182/b/a/golden_axe_logo_by_ringostarr39-d6bj31y.png",
+				"https://jogadorpensante.files.wordpress.com/2011/12/logo1.jpg",
+				"https://www.mariowiki.com/images/c/c2/Bananastub.jpg",
+				"https://uk.webuy.com/product_images/Gaming/3DS%20Software/045496520021_l.jpg",
+				"https://spiravirgo.files.wordpress.com/2016/04/super_mario_land_2_6_goldend_coins_logo.png?w=648",
+				"https://www.mariowiki.com/images/c/ce/GoldenDivaWL4.png",
+				"https://www.mariowiki.com/images/a/a4/GoldenMushroomMK8.png",
+				"https://www.mariowiki.com/images/5/58/Tap-tap_the_golden.png",
+				"https://www.mariowiki.com/images/4/41/GoldenLeaf_PM2.png",
+				"https://www.mariowiki.com/images/1/19/GoldenPlungerTwo.jpg",
+				"https://www.mariowiki.com/images/9/9a/Golden_Chomp_Artwork_-_Super_Mario_Galaxy_2.png",
+				"https://hydra-media.cursecdn.com/zelda.gamepedia.com/7/75/Golden_Octorok_TMC.png",
+				"https://hydra-media.cursecdn.com/zelda.gamepedia.com/1/1d/Gold_Thin-legged_Camel_TRR.png",
+				"https://hydra-media.cursecdn.com/zelda.gamepedia.com/e/e6/Goldenfeather_Artwork.png",
+				"https://hydra-media.cursecdn.com/zelda.gamepedia.com/d/dc/Golden_Bee.png",
+				"https://hydra-media.cursecdn.com/zelda.gamepedia.com/b/bb/Master_Sword_Lv.3.png",
+				"http://images.wikia.com/zelda/images/5/5b/Golden_Gauntlets.png",
+				"https://hydra-media.cursecdn.com/zelda.gamepedia.com/2/23/ALBW_Triforce.png",
+				"http://i.imgur.com/cvDfY0d.png",
+				"https://hydra-media.cursecdn.com/bindingofisaacrebirth.gamepedia.com/9/97/GoldPoop.png"
+			]
+		}
+	},
+
+
+
+	"say": {
+		"category": "whitelist",
+		"auth": "say",
+		"info": "Forces me to say stuff.  Use common sense with this command.",
+		"function": "forceSay"
+	},
+
+	"reveal": {
+		"category": "general",
+		"info": "Reveals the name of the last person to use my say command.",
+		"function": "revealSay"
+	},
+
+	"delcmd": {
+		"category": "general",
+		"info": "Toggles whether I delete every message with a valid command.",
+		"function": "toggleDelCmd"
+	},
+
+	"gitpull": {
+		"categoory": "mod-only",
+		"auth": "owner",
+		"info": "Forces me to update my local files from the github repo.",
+		"function": "gitPull"
+	},
+
+	"regex": {
+		"categoory": "mod-only",
+		"auth": "owner",
+		"info": "Check the regex string for a specific category",
+		"function": "getRegex"
+	},
+
+
+	"channel": {
+		"category": "mod-only",
+		"auth": "owner",
+		"info": "Toggles whether I can post in a given channel.  You must specify a valid channel name (for example, `/minnie channel general`).",
+		"function": "toggleChannel"
+	},
+
+	"channelname": {
+		"category": "mod-only",
+		"auth": "owner",
+		"info": "Changes the current channel's name.  You must specify a valid channel name (for example, `/minnie channelname abandon-all-hope-ye-who-enter`).",
+		"function": "nameChannel"
+	},
+
+	"channeldesc": {
+		"category": "mod-only",
+		"auth": "owner",
+		"info": "Changes the current channel's description.  You must specify a valid string (for example, `/minnie channeldesc Waluigi is underrated, fight me`).",
+		"function": "describeChannel"
+	},
+
+
+
+	"startpoll": {
+		"category": "poll",
+		"auth": "owner",
+		"info": "Begins a reaction poll.  Limit one ongoing poll per channel, be sure to call the other functions first to configure it!",
+		"function": "startPoll"
+	},
+
+	"endpoll": {
+		"category": "poll",
+		"auth": "owner",
+		"info": "If a poll is active in the current channel, ends it prematurely and announces the results.",
+		"function": "startPoll"
+	},
+
+	"clearpoll": {
+		"category": "poll",
+		"auth": "owner",
+		"info": "Resets the poll config.",
+		"function": "clearPoll"
+	},
+
+	"declutterpoll": {
+		"category": "poll",
+		"auth": "owner",
+		"info": "Removes reaction clutter from the current channel's active poll.",
+		"function": "declutterPoll"
+	},
+
+	"abortpoll": {
+		"category": "poll",
+		"auth": "owner",
+		"info": "Ends the poll without announcing the results.",
+		"function": "abortPoll"
+	},
+
+	"extendpoll": {
+		"category": "poll",
+		"auth": "owner",
+		"info": "Extends the poll with the given amount of time.  Arguments should be given as numbers separated by spaces and correspond to increasing units of time (`minutes` `hours` `days`)",
+		"function": "extendPoll",
+		"needsArgs": "yes"
+	},
+
+
+
+	"pollquestion": {
+		"category": "poll",
+		"auth": "owner",
+		"info": "Sets the question for the poll.",
+		"function": "pollQuestion",
+		"needsArgs": "yes"
+	},
+
+	"polloption": {
+		"category": "poll",
+		"auth": "owner",
+		"info": "Adds an option to the poll.",
+		"function": "pollOption",
+		"needsArgs": "yes"
+	},
+
+	"polldeadline": {
+		"category": "poll",
+		"auth": "owner",
+		"info": "Sets a deadline for the poll.  Arguments should be given as numbers separated by spaces and correspond to increasing units of time (`minutes` `hours` `days`)",
+		"function": "pollDeadline",
+		"needsArgs": "yes"
+	},
+
+
+
+	"pollyesclutter": {
+		"category": "poll",
+		"auth": "owner",
+		"info": "Enables 'clutter' reactions on the poll (reactions not corresponding to an option).",
+		"function": "pollEnableClutter"
+	},
+
+	"pollnoclutter": {
+		"category": "poll",
+		"auth": "owner",
+		"info": "Disables 'clutter' reactions on the poll (reactions not corresponding to an option).",
+		"function": "pollEnableClutter"
+	},
+
+
+
+	"pollyessubmit": {
+		"category": "poll",
+		"auth": "owner",
+		"info": "Allows everyone to submit poll options (limit one per member.)",
+		"function": "pollEnableClutter"
+	},
+
+	"pollnosubmit": {
+		"category": "poll",
+		"auth": "owner",
+		"info": "Allows everyone to submit poll options (limit one per member.)",
+		"function": "pollEnableClutter"
+	},
+
+
+
+	"shutdown": {
+		"category": "mod-only",
+		"info": "Shuts me down.",
+		"function": "shutDown",
+		"phrases": {
+			"all": [
+				"<phrase exit>"
+			]
+		}
+	}
+}

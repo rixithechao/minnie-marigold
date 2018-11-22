@@ -1,0 +1,9 @@
+{
+  "bot" : "(m)[in]+(e|i|ie|y)",
+  "indirect" : "(you|y'all|yer|ye|ya|yon|thou|thee|thy|chum|comrade|mi(s)+(y|ie)|mam|fam|pal|amigo|partner|buster brown|sis|sist[aeiou]|friend|gal|girl|lady|doll|dame)",
+  "ratedr" : "fuck|sex|fornicate|intercourse|crap|shit|boob(s|z)*|breast(s|z)*|flash|lewd",
+  "threat" : "senile|old|hag|suck|loser|dweeb|dork|weak|idiot|moron|jerk|jackass|butt|poser|nerd|worthless|coward|pathetic|appetizing|delicious|tasty|adorable|harmless|lame|punk|twit|dumb|weird|scary|uninteresting|intimidating|ugly|gross|hideous|freaky|ew|slimy|disgusting|shut up|shut it|shaddup|horrifying|terrifying|egghead|laughable|second-rate|lazy|boring|odd|meh|worm|ass|dick|poop|dolt|dunce|dimwit|daft|bookworm|worst|annoying|obnoxious",
+  "brag" : "cool|nice|neat|awesome|amazing|astounding|mystic|magical|mystifying|swell|astonishing|impressive|artistic|humble|modest|fantastic|wonderful|skilled|talented|brilliant|genius|rad|interesting|intriguing|funny|amusing|smart|lit|sexy|best|great|good|mighty|powerful|grand",
+  "decline" : "(could you)|please",
+  "about" : "who|what|why|how"
+}

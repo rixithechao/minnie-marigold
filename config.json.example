@@ -1,0 +1,12 @@
+{
+    "ownerIds"        : "<array of user IDs that have automatic full authorization for all commands>",
+    "loginId"         : "<your bot token>",
+    "modRoleId"       : "<the ID of the server's moderator role>",
+    "startingChannel" : "<the channel that Minnie first posts in whenever she's run>",
+    "authIds"         : 
+    {
+        "say"         : ["<an array of user IDs authorized to use commands with this 'auth' property>"],
+        "etc"         : ["<an array of user IDs authorized to use commands with this 'auth' property>"]
+    }
+}
+
