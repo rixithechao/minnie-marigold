@@ -48,7 +48,7 @@ let lastAndTime = -5000;
 let andCount = Math.floor((Math.random() * 3) + 3);
 
 let canPostInGeneral = false;
-let channelsAllowed = {[mconfig.startingChannel]: true};
+let channelsAllowed = {[mconfig.startingChannel] : true};
 let deleteAll = false;
 
 let ttsActive = false;
@@ -61,6 +61,26 @@ let sayMessage = new Array(0);
 // Set up regexp stuff
 let keywordRegex = {_thing: true};
 updateRegex();
+
+function isChannelAllowed(channel)
+{
+    let chId = channel.id.toString();
+    if(chId in channelsAllowed)
+        return channelsAllowed[chId] === true;
+    else
+        return false;
+}
+
+function setChannelAllowed(channel, isAllowed)
+{
+    let chId = channel.id.toString();
+    channelsAllowed[chId] = isAllowed;
+}
+
+function getChannelByName(guild, channelName)
+{
+    return guild.channels.find("name", channelName);
+}
 
 let msgFailedAttempts = 0;
 function msgSendError(error, message)
@@ -620,21 +640,21 @@ cmdFuncts.forceSay = function (msg, cmdStr, argStr, props)
 cmdFuncts.toggleChannel = function (msg, cmdStr, argStr, props)
 {
     let setStr = argStr;
-    let myChannel = client.channels.find('name', setStr);
-    if (myChannel != null)
+    let chan = getChannelByName(msg.guild, setStr);
+    if (chan)
     {
-        if (channelsAllowed[setStr] === true)
+        if (isChannelAllowed(chan))
         {
             //keywordPost (msg.channel, "disableChannel");
             sendMsg({channel: msg.channel, msg: "Sure thing, I can stop posting in #" + setStr + "!"});
-            channelsAllowed[setStr] = false;
+            setChannelAllowed(chan, false);
         }
         else
         {
             //keywordPost (msg.channel, "enableChannel");
             sendMsg({channel: msg.channel, msg: "Huh?  you want to see me in #" + setStr + "?  Okay!"});
-            channelsAllowed[setStr] = true;
-            keywordPost(myChannel, "enter");
+            setChannelAllowed(chan, true);
+            keywordPost(chan, "enter");
         }
         updateJson(serverdata, 'serverdata');
     }
@@ -949,7 +969,8 @@ client.on("message", msg =>
             else
             {
                 // Don't respond to messages outside of permitted channels
-                if (channelsAllowed[msg.channel.name] !== true) return;
+                if (isChannelAllowed(msg.channel) !== true)
+                    return;
 
                 // Parse message
                 let aboutMe = false;
@@ -1107,8 +1128,11 @@ client.on('ready', () =>
 
     updateServerData(myChannel.guild);
 
-    if (serverdata[myChannel.guild.id].channelsAllowed != null)
-        channelsAllowed = serverdata[myChannel.guild.id].channelsAllowed;
+    let sDataCA = serverdata[myChannel.guild.id].channelsAllowed;
+    if (Object.keys(sDataCA).length === 0 && sDataCA.constructor === Object)
+        channelsAllowed = {[startingChannelId] : true};
+    else
+        channelsAllowed = sDataCA;
 
     let introString = getPhraseRandom("enter");
     if (introString != null && myChannel != null)
