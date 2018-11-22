@@ -3,6 +3,10 @@ let client = new Discord.Client();
 const fs = require("fs");
 let exec = require("child_process").execFile;
 
+// WatchDog for SystemD
+let notify = null;
+if (process.platform === 'linux')
+    notify = require('sd-notify');
 
 // ==== Auth URL ====
 //https://discordapp.com/oauth2/authorize?client_id={Put%20your%20ID%20here}&scope=bot&permissions=67169280
@@ -1075,6 +1079,14 @@ client.on("message", msg =>
 
 client.on('ready', () =>
 {
+    if (process.platform === 'linux')
+    {
+        notify.ready();
+        const watchdogInterval = 2800;
+        console.log('Initializing SystemD WatchDog with ' + watchdogInterval + ' millseconds internal ...');
+        notify.startWatchdogMode(watchdogInterval);
+    }
+
     client.user.setStatus("online").catch(msgSendError);
     client.user.setActivity("with the arcane energies that govern our world!").catch(msgSendError);
     let myGuild = client.guilds.get(startingGuildId);

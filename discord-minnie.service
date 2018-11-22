@@ -1,0 +1,23 @@
+[Unit]
+Description=Minnie Marigold for Discord.JS
+Wants=local-fs.target network.target
+After=local-fs.target network.target
+
+[Service]
+ExecStart=/usr/bin/node --max-old-space-size=256 --expose-gc /home/vitaly/_Bots/minnie-marigold/minnie.js
+WorkingDirectory=/home/vitaly/_Bots/minnie-marigold
+Type=notify
+KillMode=process
+WatchdogSec=5
+Restart=on-failure
+RestartSec=5
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=discord-minnie
+User=vitaly
+Group=vitaly
+Environment=NODE_ENV=minniemarigold
+
+[Install]
+WantedBy=multi-user.target
+
