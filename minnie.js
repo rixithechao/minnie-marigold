@@ -1124,9 +1124,9 @@ client.on('ready', () =>
         return;
     }
 
-    let sDataCA = serverdata[myChannel.guild.id].channelsAllowed;
-    if (Object.keys(sDataCA).length === 0 && sDataCA.constructor === Object)
-        channelsAllowed = {[startingChannelId] : true};
+    let sDataCA = serverdata[myChannel.guild.id] ? serverdata[myChannel.guild.id].channelsAllowed : undefined;
+    if (!sDataCA || (Object.keys(sDataCA).length === 0 && sDataCA.constructor === Object))
+        channelsAllowed = {[startingChannelId]: true};
     else
         channelsAllowed = sDataCA;
 
