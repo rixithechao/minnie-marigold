@@ -72,6 +72,7 @@ function setChannelAllowed(channel, isAllowed)
 {
     let chId = channel.id.toString();
     channelsAllowed[chId] = isAllowed;
+    serverdata.channelsAllowed = channelsAllowed;
 }
 
 function getChannelByName(guild, channelName)
@@ -1123,13 +1124,13 @@ client.on('ready', () =>
         return;
     }
 
-    updateServerData(myChannel.guild);
-
     let sDataCA = serverdata[myChannel.guild.id].channelsAllowed;
     if (Object.keys(sDataCA).length === 0 && sDataCA.constructor === Object)
         channelsAllowed = {[startingChannelId] : true};
     else
         channelsAllowed = sDataCA;
+
+    updateServerData(myChannel.guild);
 
     let introString = getPhraseRandom("enter");
     if (introString != null && myChannel != null)
