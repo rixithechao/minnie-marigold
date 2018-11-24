@@ -22,9 +22,7 @@ let startingGuildId     = mconfig.startingGuild;
 let authorizeData       = mconfig.authIds;
 
 if (authorizeData == null)
-{
     authorizeData = {};
-}
 
 
 // Other stuff
@@ -47,7 +45,6 @@ let prevAuthor = null;
 let lastAndTime = -5000;
 let andCount = Math.floor((Math.random() * 3) + 3);
 
-let canPostInGeneral = false;
 let channelsAllowed = {[mconfig.startingChannel] : true};
 let deleteAll = false;
 
