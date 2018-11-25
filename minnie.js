@@ -1090,8 +1090,10 @@ client.on("message", msg =>
 
     } catch (err)
     {
-        keywordPost(msg.channel, "error");
-        msg.channel.send("```" + err + "```");
+        //dummying this stuff out for the time being so this bot isn't kicked out of codehaus
+
+		//keywordPost(msg.channel, "error");
+        //msg.channel.send("```" + err + "```");
         console.log(err);
     }
 });
