@@ -24,6 +24,12 @@ let authorizeData       = mconfig.authIds;
 if (authorizeData == null)
     authorizeData = {};
 
+let emoteReacts = {
+    default: ["✊"],
+    threat: ["somedork:231283304958001154", "gravytea:232183775549849600", "thonkang:273610959094808576", "suspicious:231273731132096513", "😡", "😠", "🔥", "😏", "👎", "☠", "⚔"],
+    brag: ["🍒", "😎", "🍆", "👍", "🥇", "👌", "🤘"],
+    precious: ["💎", "💰", "💲", "💵"]
+};
 
 // Other stuff
 let commands = JSON.parse(fs.readFileSync("commands.json", "utf8"));
@@ -117,6 +123,32 @@ function getArrayRandom(array)
     }
 }
 
+function reactFromArray(message, array)
+{
+    if (array == null)
+    {
+        array = emoteReacts.default
+        //console.log("No valid array provided, attempting to use default emote array")
+    }
+    //console.log("Array values: "+array.toString())
+
+    let emote = getArrayRandom(array).value;
+    if (emote != null)
+    {
+        //console.log("Attempting to react with "+emote.toString())
+        message.react(emote);
+
+        /*
+        if  (emote.startsWith(":"))
+            message.react(emote);
+        else
+            message.react(message.guild.emojis.get(emote));
+        */
+
+    }
+    else
+        console.log("Couldn't get a valid emoji string")
+}
 
 function updateJson(data, name)
 {
@@ -150,7 +182,6 @@ function updateServerData(guild)
     // Channel data
     guild.channels.forEach(channel =>
     {
-
         console.log("UPDATING SERVER'S CHANNEL DATA: " + channel.id.toString() + "(" + channel.name + ")");
 
         if (guildEntry.channels[channel.id] == null)
@@ -800,7 +831,7 @@ client.on("messageReactionAdd", (reactionRef, userRef) =>
         }
 
         // Check for authorization
-        let authorized = ((ownerIds.indexOf(userRef.id) !== -1) || member.roles.has(modRoleId));
+        let authorized = ((ownerIds.indexOf(userRef.id) !== -1) || (member && member.roles.has(modRoleId)));
         let authordata = userdata[userRef.id];
         if (authordata != null)
         {
@@ -857,13 +888,13 @@ client.on("message", msg =>
 
             // Log the message
             console.log("------------------------");
-            if (msg.member != null)
+            if (!msg.member)
                 console.log(msg.member.displayName + " said: " + msg.cleanContent);
             else
                 console.log("[unknown] said: " + msg.cleanContent);
 
             // Authority check
-            let authorized = ((ownerIds.indexOf(msg.author.id) !== -1) || msg.member.roles.has(modRoleId));
+            let authorized = ((ownerIds.indexOf(msg.author.id) !== -1) || (msg.member && msg.member.roles.has(modRoleId)));
             let authordata = userdata[msg.author.id];
             if (authordata != null)
             {
@@ -1047,9 +1078,11 @@ client.on("message", msg =>
 
                     if (Math.random() > 0.5 && emoteReacts[highestRandString] != null)
                     {
-                        let emoteCategory = emoteReacts[highestRandString];
-                        console.log("emote category: " + highestRandString);
-                        reactFromArray(msg, emoteCategory);
+                        // ---- Do nothing for now ----
+
+                        // let emoteCategory = emoteReacts[highestRandString];
+                        // console.log("emote category: " + highestRandString);
+                        // reactFromArray(msg, emoteCategory);
                     }
                     else
                         keywordPost(msg.channel, highestRandString);
@@ -1062,9 +1095,10 @@ client.on("message", msg =>
                     // React to precious keyword with gem
                     if (Math.random() > 0.8 && highestRandString !== "threat" && emoteReacts[highestRandString] != null)
                     {
-                        let emoteCategory = emoteReacts[highestRandString];
-                        console.log("emote category: " + highestRandString);
-                        reactFromArray(msg, emoteCategory);
+                        // ---- Do nothing for now ----
+                        // let emoteCategory = emoteReacts[highestRandString];
+                        // console.log("emote category: " + highestRandString);
+                        // reactFromArray(msg, emoteCategory);
                     }
 
                     // Occasionally respond with "& Knuckles" anyway
