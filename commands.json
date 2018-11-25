@@ -98,7 +98,10 @@
 	"brag": {
 		"phrases": {
 			"all": [
-				"..."
+				"Hah, yeah, I'm pretty great, aren't I?",
+				"Thank you, I'll be here all week!",
+				"Aww shucks!",
+				"Heck yeah!"
 			]
 		}
 	},
@@ -106,7 +109,7 @@
 	"about": {
 		"phrases": {
 			"all": [
-				"..."
+				"I'm the marvelous Minnie Marigold, magician extraordinaire!  If you need my assistance, just type /minnie help and I'll show you what I can do!"
 			]
 		}
 	},
@@ -114,7 +117,14 @@
 	"threat": {
 		"phrases": {
 			"all": [
-				"..."
+				"Word of advice: don't pick a fight with a magician.",
+				"No need to get aggressive, now!",
+				"lol",
+				"Oh please, you'll have to do better than that!",
+				"That's nice.",
+				"Uh huh. Sure.",
+				"Oh goodness, however shall I recover from such a _scathing_ comment!?",
+				"Honey, I work in showbiz.  You're not the first to try that line."
 			]
 		}
 	},
@@ -122,7 +132,12 @@
 	"ratedr": {
 		"phrases": {
 			"all": [
-				"..."
+				"I'm flattered, but no.",
+				"Uhhhhh. This. Isn't that kind of show.",
+				"No can do, darlin'!  This show's for all audiences~",
+				"Preeeeetty sure what you're asking for is a breach of the magician's code...",
+				"I consulted the spirits and they advised against that.  Heavily.",
+				"Oh-ho-ho, nice try you cheeky devil~"
 			]
 		}
 	},

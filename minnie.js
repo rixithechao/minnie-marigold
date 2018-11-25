@@ -1063,8 +1063,8 @@ client.on("message", msg =>
                     highestRandString = "brag";
 
 
-                // Check if the message is directed at or about the bot
-                aboutMe = (msg.isMentioned(client.user) === true || detectedTypes.bot > 0 || (prevAuthor === client.user && detectedTypes.indirect > 0));
+                // Check if the message is directed at the bot
+                aboutMe = (msg.isMentioned(client.user) === true);// || detectedTypes.bot > 0 || (prevAuthor === client.user && detectedTypes.indirect > 0));
 
                 // If at or about the bot...
                 if (aboutMe)
