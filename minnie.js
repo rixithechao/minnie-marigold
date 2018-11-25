@@ -49,7 +49,7 @@ let serverdata = JSON.parse(fs.readFileSync("serverdata.json", "utf8"));
 let prevAuthor = null;
 
 let lastAndTime = -5000;
-let andCount = Math.floor((Math.random() * 3) + 3);
+// let andCount = Math.floor((Math.random() * 3) + 3);
 
 let channelsAllowed = {[mconfig.startingChannel] : true};
 let deleteAll = false;
@@ -1102,6 +1102,7 @@ client.on("message", msg =>
                     }
 
                     // Occasionally respond with "& Knuckles" anyway
+                    /*
                     andCount -= 1;
                     console.log("And count: " + andCount.toString());
                     if (andCount <= 0)
@@ -1116,6 +1117,7 @@ client.on("message", msg =>
                         else
                             console.log("Time since last and: " + timeSinceLastAnd.toString());
                     }
+                    */
                 }
             }
             console.log(" ");
