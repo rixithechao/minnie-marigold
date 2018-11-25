@@ -95,6 +95,46 @@
 		}
 	},
 
+	"brag": {
+		"phrases": {
+			"all": [
+				"..."
+			]
+		}
+	},
+
+	"about": {
+		"phrases": {
+			"all": [
+				"..."
+			]
+		}
+	},
+
+	"threat": {
+		"phrases": {
+			"all": [
+				"..."
+			]
+		}
+	},
+
+	"ratedr": {
+		"phrases": {
+			"all": [
+				"..."
+			]
+		}
+	},
+
+	"indirect": {
+		"phrases": {
+			"all": [
+				"..."
+			]
+		}
+	},
+
 	"noArgs": {
 		"phrases": {
 			"all": [
