@@ -2,7 +2,7 @@
     "name": "minnie-marigold",
     "version": "1.0.0",
     "description": "Minnie Marigold",
-    "main": "minnie.js.js",
+    "main": "minnie.js",
     "author": "",
     "license": "Apache-2.0",
     "dependencies": {
