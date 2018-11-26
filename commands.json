@@ -373,6 +373,30 @@
 		}
 	},
 
+	"kek": {
+		"category": "general",
+		"info": "That fox fellow sure likes this phrase, doesn't he?",
+		"phrases": {
+			"all": [
+				"http://www.kitchennostalgia.com/images2/desserts/cakes/magic-cake1a-wKN.jpg",
+				"https://2.bp.blogspot.com/-eRlAs_ZjZ0s/VNjKNF2RPAI/AAAAAAAAOqw/AgMN4TxAze8/s1600/magiccake1.jpg",
+				"https://www.jocooks.com/wp-content/uploads/2014/06/lemon-magic-cake11.jpg",
+				"https://i1.wp.com/lovefoodies.com/wp-content/uploads/2015/09/Caramel-Cake-Flan61.jpg?resize=750%2C1200",
+				"http://www.cakeimages.com/wp-content/uploads/2016/08/Magic-Birthday-Cake.jpg",
+				"https://i.pinimg.com/736x/3e/fc/e0/3efce03984a6285658e57615526d55ce.jpg",
+				"https://4.bp.blogspot.com/-_l48RxzfAgo/Un_7rk6Pn-I/AAAAAAAAIQ0/VyYtZamtn84/s1600/Main.png",
+				"https://www.atipsygiraffe.com/wp-content/uploads/2014/10/2014-09-23-18.43.23-1024x767.jpg",
+				"https://foodnessgracious.com/wp-content/uploads/2014/02/key-lime-magic-cake-002a.jpg",
+				"https://4.bp.blogspot.com/-ElRsbMCjPNo/WRPnNq6E0HI/AAAAAAAADSw/M3PCqV2VTN41KFCdA2pBW3Lx8DLa0cUuQCLcB/s1600/Pin-MagicCustardCake.jpg",
+				"https://4.bp.blogspot.com/-RUXGrlinEqE/Vduf4526ALI/AAAAAAAAeEg/LgU6YNmra4U/s1600/Magic%2BPumpkin%2BCake%2B%2528copyright%252C%2Bthecountrycook.net%2529.jpg",
+				"http://www.sugarshowcase.com/sites/default/files/styles/cake-full-size/public/cakes/magician.jpg",
+				"https://livingsweetmoments.com/wp-content/uploads/2016/10/chocolate-magic-custard-cake-recipe-cover.jpg",
+				"https://3.bp.blogspot.com/_zQ_y8psoWPY/TQ4SyDxKwnI/AAAAAAAADmY/oJOpoKbw_CE/s1600/Magic%2BHat%2BCake%2B080.JPG",
+				"http://www.cake-magic.com/dalmations_on_chair-novelty_children.jpg"
+			]
+		}
+	},
+
 
 	"thatRascal": {
 		"phrases": {
