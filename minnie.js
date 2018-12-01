@@ -242,7 +242,7 @@ function updateRegex()
 }
 
 
-function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel)
+function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, userToMention)
 {
     if (args.sequenceLevel == null)
         args.sequenceLevel = 0;
@@ -257,6 +257,10 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel)
         midSequence = true;
         if (args.sequenceLevel === 0)
             firstOfSequence = true
+    }
+    if (currentMsg.includes("<mention>")  &&  args.userToMention != null)
+    {
+        currentMsg = currentMsg.replace(/<mention>/gi, "@" + userToMention.username + "#" + userToMention.discriminator + " ");
     }
 
     if (args.waitRange == null)
@@ -467,6 +471,14 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
         client.destroy().catch(msgSendError);
     }, 10000);
 };
+
+
+
+cmdFuncts.welcomeToCodehaus = function (channel, user)
+{
+	sendMsg({channel: channel, msg: getPhraseRandom("welcome", "all"), userToMention: user});
+}
+
 
 
 let cleanupTrigger = "🇶";
@@ -880,6 +892,9 @@ client.on("messageReactionAdd", (reactionRef, userRef) =>
 });
 
 
+/**********************************************
+*  ON MESSAGE                                 *
+**********************************************/
 client.on("message", msg =>
 {
 
@@ -1137,6 +1152,31 @@ client.on("message", msg =>
     }
 });
 
+
+/**********************************************
+*  ON WELCOME                                 *
+**********************************************/
+bot.on("guildMemberAdd", member => {
+	let channelGen = member.guild.defaultChannel;
+	let channelBoop = bot.channels.find('name', 'beep-boop');
+
+	try 
+	{
+		let tempQuiet = quietMode;
+		let tempSeq = midSequence;
+		cmdFuncts.welcomeToCodehaus (channelGen, member.user);
+	}
+	catch(err) 
+	{
+		//channelGen.sendMessage("Oh, I tried to welcome a new member but something went wrong!");
+		console.log(err);
+	}
+});
+
+
+/**********************************************
+*  ON START                                   *
+**********************************************/
 client.on('ready', () =>
 {
     if (process.platform === 'linux')

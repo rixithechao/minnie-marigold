@@ -36,6 +36,107 @@
 	},
 
 
+	"welcome": {
+		"category": "general",
+		"phrases": {
+			"all": [
+				"Hi, <mention>! Welcome to the codehaus of code where <phrase welcometemp>"
+			]
+		}
+	},
+	"welcometemp": {
+		"phrases": {
+			"all": [
+				"we talk about <phrase welcometopic>",
+				"we talk about <phrase welcometopic> and <phrase welcometopic>",
+				"we talk about <phrase welcometopic> and <phrase welcometopic>, and sometimes <phrase welcometopic>",
+				"we talk about <phrase welcometopic> and <phrase welcometopic>, and on occasion <phrase welcometopic>",
+				"we talk about <phrase welcometopic>, except when we don't",
+				"sometimes we talk about <phrase welcometopic>, others <phrase welcometopic>",
+				"<phrase welcome> and <phrase welcometopic> are occasionally discussed",
+				"talking about <phrase welcometopic> sometimes bothers roboloe",
+				"I scheme to eat all the cheeses"
+			]
+		}
+	},
+	"welcometopic": {
+		"phrases": {
+			"all": [
+				"robots",
+				"butts",
+				"lua",
+				"lunalua",
+				"onTick",
+				"onCameraUpdate",
+				"onTickNPC",
+				"glDraw",
+				"using indoor voices",
+				"me lying about things we talk about in the greeting",
+				"how to properly name a meme channel",
+				"proper code documentation",
+				"the value of my existence",
+				"matters of utmost seriousness",
+				"welcoming people to the codehaus of code where we welcome people to the codehaus of code with our standard greeting that goes 'welcome to the codehaus of code' followed by other stuff",
+				"level design",
+				"world 1-1 in Super Mario Bros",
+				"king bills",
+				"boohemoths",
+				"parallel universes",
+				"blerts and grafs",
+				"defying authority",
+				"not trying this at home",
+				"the singularity",
+				"the fourth dimension",
+				"the eventual heat death of the universe",
+				"the impending death of textblox",
+				"dancing on cinematx's grave",
+				"add text here alan",
+				"the ritual 'welcome to the codehaus of code' greeting",
+				"RED PLS",
+				"dank maymays",
+				"fast-paced senpais",
+				"the secret of evolution",
+				"raocow",
+				"letterboxing",
+				"the meaning of life",
+				"the illuminati",
+				"how to identify the color purple",
+				"Kirby",
+				"Uncle Broadsword",
+				"the emoji economy",
+				"the practical applications of grated cheese",
+				"our standardized greeting",
+				"the true codehaus being inside you all along",
+				"video game violins",
+				"non-sequitur greetings",
+				"Knuckles",
+				"the bot invasion",
+				"hoeloe",
+				"Mario",
+				"telegraphing",
+				"video games",
+				"dreams",
+				"everything",
+				"SMBX2",
+				"how totally awesome roboloe is",
+				"our glorious supreme leader Bastion",
+				"the number twelve",
+				"stuff",
+				"things",
+				"that one time a thing happened",
+				"how extremely dated some of the randomly-selected items for this welcome message are",
+				"code",
+				"code",
+				"code",
+				"code",
+				"code",
+				"code",
+				"code"
+			]
+		}
+	},
+
+
 	"ping": {
 		"function": "ping"
 	},
@@ -196,6 +297,183 @@
 		"function": "setCleanupTrigger",
 		"auth": "owner"
 	},
+
+
+
+	"anime": {
+		"category": "general",
+		"info": "Care to peruse my collection of rare, exotic foreign animation?",
+		"phrases": {
+			"all": [
+				"http://i.imgur.com/5lsDzpK.png",
+				"http://i.imgur.com/9qLKZaP.jpg",
+				"http://i.imgur.com/kW7aMPd.jpg",
+				"http://i.imgur.com/rAklHw0.jpg",
+				"http://i.imgur.com/H6t2Kz7.gif",
+				"http://i.imgur.com/M3AAHhx.png",
+				"http://i.imgur.com/o3QZxb8.png",
+				"https://www.youtube.com/watch?v=uS1LmpiJFaM",
+				"https://www.youtube.com/watch?v=x2ypDDYDl70",
+				"http://i.imgur.com/3X1kPEb.gif",
+				"https://www.youtube.com/watch?v=nmPPCkF6-fk",
+				"https://www.youtube.com/watch?v=l5solYnY3MM",
+				"http://i.imgur.com/oBYeFiW.png",
+				"http://i.imgur.com/NqCgWrg.jpg",
+				"http://i.imgur.com/D07X9aL.png",
+				"http://i.imgur.com/bqx7Jpq.gif",
+				"http://i.imgur.com/5uWLikn.jpg?1",
+				"http://i.imgur.com/IL0HnN0.gif",
+				"http://i.imgur.com/BBPyyUd.gif",
+				"http://i.imgur.com/D6QR7J2.gif",
+				"http://i.imgur.com/Ba2Lwj2.gif",
+				"http://i.imgur.com/bKJwFA4.gif",
+				"https://www.youtube.com/watch?v=tEJD8-jcmOA",
+				"https://www.youtube.com/watch?v=z30Y572EmCk",
+				"https://www.youtube.com/watch?v=byDglOhxmdA",
+				"http://i.imgur.com/udW9J2s.gif",
+				"http://i.imgur.com/WXEYfV4.gif",
+				"http://i.imgur.com/msGB7N8.gif",
+				"http://i.imgur.com/BZomtZO.jpg?1",
+				"http://i.imgur.com/vs2IkYB.gif",
+				"http://i.imgur.com/SqCX0E2.jpg",
+				"http://i.imgur.com/o8a7Vkw.gif",
+				"http://i.imgur.com/3nfWvj3.gif?1",
+				"http://i.imgur.com/tbJjIxH.gif?1",
+				"http://i.imgur.com/SViHYwF.png",
+				"http://i.imgur.com/P6xkXJZ.gif",
+				"http://i.imgur.com/QVI69pp.gif",
+				"http://i.imgur.com/KGYevSg.gif",
+				"http://i.imgur.com/TpJB40Y.gif",
+				"http://i.imgur.com/2l6MvRf.gif",
+				"http://i.imgur.com/QVwrd8y.gif",
+				"http://i.imgur.com/OQwaUtB.gif",
+				"http://i.imgur.com/l7EuBCm.gif",
+				"http://i.imgur.com/fK6OpfA.gif",
+				"http://i.imgur.com/tcdoqpq.png",
+				"http://i.imgur.com/4B5fMgl.jpg",
+				"http://i.imgur.com/U2zl36z.jpg",
+				"http://i.imgur.com/bE3QhAk.jpg",
+				"http://i.imgur.com/SfoC5Il.jpg",
+				"http://i.imgur.com/VfXI7uk.jpg",
+				"http://i.imgur.com/sQoi4Vy.jpg",
+				"http://i.imgur.com/mtVV6hN.jpg",
+				"http://i.imgur.com/B468r64.jpg",
+				"http://i.imgur.com/evp6cgB.jpg",
+				"http://i.imgur.com/zde8DoW.png",
+				"http://i.imgur.com/cvvZhOJ.jpg",
+				"http://i.imgur.com/X4vVlWV.jpg",
+				"http://i.imgur.com/6SlYe4r.png",
+				"http://i.imgur.com/L0YfmSU.png",
+				"http://img07.deviantart.net/8af9/i/2015/305/1/f/raocow_reunion_by_miloilo-d9f51qy.jpg",
+				"http://i.imgur.com/BgIlsjV.gif",
+				"http://i.imgur.com/K82B0Ov.gif",
+				"http://i.imgur.com/pDh4SZw.jpg",
+				"http://i.imgur.com/ajPcwM7.gif",
+				"https://www.youtube.com/watch?v=oawUi9s3ENE",
+				"http://i.imgur.com/RCGpprN.png?1",
+				"http://i.imgur.com/QGjesBH.gif",
+				"http://i.imgur.com/EzlPh7V.png",
+				"http://i.imgur.com/JcLvzA9.gif",
+				"http://i.imgur.com/BZZ1rO9.jpg",
+				"http://i.imgur.com/abf0BLA.gif",
+				"http://i.imgur.com/agq6Oea.png",
+				"http://i.imgur.com/IS4jZkw.png",
+				"https://www.youtube.com/watch?v=c5G5bD2Do-k",
+				"https://www.youtube.com/watch?v=ieQ1rAIjzXc",
+				"https://www.youtube.com/watch?v=Z6Ek3h4HTRE",
+				"https://www.youtube.com/watch?v=kuNixp-wvWM",
+				"http://i.imgur.com/wicxnvQ.gif",
+				"http://i.imgur.com/yOvbUcE.gif",
+				"http://i.imgur.com/QUT51gA.gif",
+				"http://i.imgur.com/gmEIIH7.gif",
+				"http://i.imgur.com/1Eyyd3i.gif",
+				"https://www.youtube.com/watch?v=Sso4vjERgdA",
+				"http://i.imgur.com/MC0HzdV.jpg",
+				"http://i.imgur.com/gefkkrl.jpg",
+				"http://i.imgur.com/FoQKoP6.png",
+				"http://i.imgur.com/KvqQpVV.gif",
+				"http://i.imgur.com/UXuZtCw.gif",
+				"https://www.youtube.com/watch?v=cDHRQLJSA8M",
+				"http://i.imgur.com/W6PMH8Z.gif",
+				"http://i.imgur.com/d4wYRwD.gif",
+				"http://i.imgur.com/efEBWDZ.gif",
+				"http://i.imgur.com/JDtaOIs.gif",
+				"http://i.imgur.com/HZCiCpd.gif",
+				"http://i.imgur.com/AH0VksR.gif"
+			]
+		}
+	},
+
+	"dofur": {
+		"category": "general",
+		"info": "This one needs no explanation.",
+		"phrases": {
+			"all": [
+				"https://www.youtube.com/watch?v=9q7W4unWy9w",
+				"https://www.youtube.com/watch?v=GfCOyAmCE30",
+				"https://www.youtube.com/watch?v=rGQT2tm7I2Q",
+				"https://www.youtube.com/watch?v=5psUWW5kbGE",
+				"https://www.youtube.com/watch?v=LgKtqNWzYW8",
+				"https://www.youtube.com/watch?v=Rg6WTFgLBN8",
+				"https://www.youtube.com/watch?v=11JCTnC-Wng",
+				"https://www.youtube.com/watch?v=kzHTh3_8SlE",
+				"https://www.youtube.com/watch?v=G6zWSRllGac",
+				"https://www.youtube.com/watch?v=uV3Vpy0lBeE",
+				"https://www.youtube.com/watch?v=14YgCWznV7w",
+				"https://www.youtube.com/watch?v=NjQbl8Vp1RU",
+				"https://www.youtube.com/watch?v=qbwQAoJeKug",
+				"https://www.youtube.com/watch?v=i2c30nsBNyw",
+				"https://www.youtube.com/watch?v=jsABN39CYnM",
+				"https://www.youtube.com/watch?v=_CeHIl-X_rg",
+				"https://www.youtube.com/watch?v=-3OWAPnvNUM",
+
+				"https://www.youtube.com/watch?v=ad9anvDkmq0",
+				"https://www.youtube.com/watch?v=ugAkRgn1AZA",
+				"https://www.youtube.com/watch?v=lzANPUwZpZk"
+			]
+		}
+	},
+
+	"dance": {
+		"category": "general",
+		"info": "Dancing mania (also known as dancing plague, choreomania, St. John's Dance and St. Vitus's Dance) was a social phenomenon that occurred primarily in mainland Europe between the 14th and 17th centuries. It involved groups of people dancing erratically, sometimes thousands at a time. The mania affected men, women, and children who danced until they collapsed from exhaustion. One of the first major outbreaks was in Aachen, in the Holy Roman Empire, in 1374, and it quickly spread throughout Europe; one particularly notable outbreak occurred in Strasbourg in 1518, also in the Holy Roman Empire.  Affecting thousands of people across several centuries, dancing mania was not an isolated event, and was well documented in contemporary reports. It was nevertheless poorly understood, and remedies were based on guesswork. Generally, musicians accompanied dancers, to help ward off the mania, but this tactic sometimes backfired by encouraging more to join in. There is no consensus among modern-day scholars as to the cause of dancing mania.",
+		"phrases": {
+			"all": [
+				"https://www.youtube.com/watch?v=c5G5bD2Do-k",
+				"https://www.youtube.com/watch?v=ieQ1rAIjzXc",
+				"https://www.youtube.com/watch?v=6E4bT58skMA",
+				"https://www.youtube.com/watch?v=3nh5TluOnFA",
+				"https://www.youtube.com/watch?v=Z6Ek3h4HTRE",
+				"https://www.youtube.com/watch?v=zvq9r6R6QAY"
+			]
+		}
+	},
+
+	"facepalm": {
+		"category": "general",
+		"info": "For when words aren't enough.",
+		"phrases": {
+			"all": [
+				"https://upload.wikimedia.org/wikipedia/commons/3/3b/Paris_Tuileries_Garden_Facepalm_statue.jpg",
+				"http://i.imgur.com/iWKad22.jpg",
+				"http://i.imgur.com/MvdCC29.jpg?1",
+				"https://i.imgur.com/kNQTCaJ.jpg",
+				"http://i.imgur.com/uJ53hMv.png",
+				"http://i.imgur.com/MR14zdt.jpg",
+				"http://i.imgur.com/qNENko9.png",
+				"http://i.imgur.com/EDZAa98.jpg",
+				"http://i.imgur.com/Wdu3nrg.jpg",
+				"http://i.imgur.com/Ci27Do6.jpg",
+				"http://i.imgur.com/WfBqIPe.jpg",
+				"http://i.imgur.com/u1a0f7g.gif",
+				"http://i.imgur.com/zz1rgf7.jpg",
+				"http://i.imgur.com/tdzLMLv.png",
+				"http://i.imgur.com/qDJf9Kn.jpg"
+			]
+		}
+	},
+
+
 
 	"error": {
 		"category": "general",
@@ -392,7 +670,9 @@
 				"http://www.sugarshowcase.com/sites/default/files/styles/cake-full-size/public/cakes/magician.jpg",
 				"https://livingsweetmoments.com/wp-content/uploads/2016/10/chocolate-magic-custard-cake-recipe-cover.jpg",
 				"https://3.bp.blogspot.com/_zQ_y8psoWPY/TQ4SyDxKwnI/AAAAAAAADmY/oJOpoKbw_CE/s1600/Magic%2BHat%2BCake%2B080.JPG",
-				"http://www.cake-magic.com/dalmations_on_chair-novelty_children.jpg"
+				"http://www.cake-magic.com/dalmations_on_chair-novelty_children.jpg",
+				"https://amandascookin.com/wp-content/uploads/2014/11/Magic-Pumpkin-Cake-pin-600x706.jpg",
+				"https://www.jocooks.com/wp-content/uploads/2013/03/magic-cake-2.jpg"
 			]
 		}
 	},
