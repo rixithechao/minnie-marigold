@@ -269,7 +269,7 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
     if (args.extraPause == null)
         args.extraPause = 0;
 
-    let totalTypingTime = args.msg.length * (Math.random() * args.waitRange) * 15 + args.extraPause;
+    let totalTypingTime = math.min(args.msg.length, 200) * (Math.random() * args.waitRange) * 15 + args.extraPause;
 
     setTimeout(function ()
     {
