@@ -1156,9 +1156,9 @@ client.on("message", msg =>
 /**********************************************
 *  ON WELCOME                                 *
 **********************************************/
-bot.on("guildMemberAdd", member => {
+client.on("guildMemberAdd", member => {
 	let channelGen = member.guild.defaultChannel;
-	let channelBoop = bot.channels.find('name', 'beep-boop');
+	let channelBoop = client.channels.find('name', 'beep-boop');
 
 	try 
 	{
