@@ -472,22 +472,34 @@ cmdFuncts.clearReactsOne = function (msg, cmdStr, argStr, props)
 
 cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 {
-    client.user.setStatus("invisible").catch(msgSendError);
-    msg.channel.send(getArrayRandom(props.phrases).value, {tts: (ttsActive === true)});
+    client.user.setStatus("invisible")
+        .catch(msgSendError);
+
+    let k = getArrayRandom(props.phrases.all);
+    if(k)
+    {
+        msg.channel.send(k.value, {
+            tts: (ttsActive === true)
+        }).catch(msgSendError);
+    }
     console.log("Shutting down");
 
     client.setTimeout(function ()
     {
         client.destroy().catch(msgSendError);
-    }, 10000);
+        setTimeout(function ()
+        {
+            process.exit();
+        }, 2000);
+    }, 3000);
 };
 
 
 
 cmdFuncts.welcomeToCodehaus = function (channel, user)
 {
-	sendMsg({channel: channel, msg: getPhraseRandom("welcome", "all"), userToMention: user});
-}
+    sendMsg({channel: channel, msg: getPhraseRandom("welcome", "all"), userToMention: user});
+};
 
 
 
@@ -1170,13 +1182,13 @@ client.on("guildMemberAdd", member => {
 	let channelGen = member.guild.defaultChannel;
 	let channelBoop = client.channels.find('name', 'beep-boop');
 
-	try 
+	try
 	{
 		let tempQuiet = quietMode;
 		let tempSeq = midSequence;
 		cmdFuncts.welcomeToCodehaus (channelGen, member.user);
 	}
-	catch(err) 
+	catch(err)
 	{
 		//channelGen.sendMessage("Oh, I tried to welcome a new member but something went wrong!");
 		console.log(err);

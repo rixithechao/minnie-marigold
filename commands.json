@@ -925,7 +925,8 @@
 		"function": "shutDown",
 		"phrases": {
 			"all": [
-				"<phrase exit>"
+				"<phrase exit>",
+				"Gonna to hug foxies..."
 			]
 		}
 	}
