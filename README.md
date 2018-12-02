@@ -1,20 +1,23 @@
 # minnie-marigold
-A magician-themed Discord chatbot for memes and polls and stuff, primarily used and actively developed in the codehaus server
+A magician-themed Discord.js chatbot for memes and polls and stuff, primarily used and actively developed in the codehaus server.
+
+
+--- LICENSE ---
+The character of Minnie Marigold is copyright 2018-present by Michael "Rockythechao" Charnecki.  The Minnie Marigold chatbot software is copyright 2018-present by Rockythechao, Wohlstand, and SetaYoshi.
+
+Software licensed under the Apache License, Version 2.0 (the "License");  you may not use these files except in compliance with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the specific language governing permissions and limitations under the License.
 
 
 --- TO-DO (IN ROUGH ORDER OF PRIORITY) ---
-
-- fix shutdown command so it doesn't error in the command window (and ideally posts a goodbye message)
-
-- properly integrate with wohl's server so we don't have the same trouble we did with setting up knux
-
-- finish the authorization-related code and storage (at the moment it _should_ work for everyone in the owner list in config.json so just be sure to include our IDs in there)
-
 - add luna's old lunalua documentation search feature
 
 - replace the "/minnie magic" phrases with some kinda fun, randomized command
 
-- more anime
+- fix shutdown command so it doesn't error in the command window (and ideally posts a goodbye message)
 
 - finalize and finish implementing reaction poll system & commands & stuff
     - polls stored as objects in serverdata
@@ -25,5 +28,3 @@ A magician-themed Discord chatbot for memes and polls and stuff, primarily used 
     - DM reaction menu for creating polls(?)
 
 - move some hardcoded strings to their own phrase groups in commands.json to allow for more variety
-
-- even more anime
