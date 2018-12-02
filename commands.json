@@ -162,7 +162,10 @@
 				"It's been fun, but for now I must bid you all adieu!",
 				"Oh, look at the time! Toodles!",
 				"That's all the time we have tonight, thanks for being such a wonderful audience!",
-				"Now you see me, _now you don't!_"
+				"Now you see me, _now you don't!_",
+				"I'll be back later, FoxyBot needs me for something...",
+				"Gotta go, even the greatest magicians need their beauty rest!",
+				"Love to stay and chat, but I've got a gig to get to!"
 			]
 		}
 	},
@@ -925,8 +928,7 @@
 		"function": "shutDown",
 		"phrases": {
 			"all": [
-				"<phrase exit>",
-				"Gonna to hug foxies..."
+				"<phrase exit>"
 			]
 		}
 	}

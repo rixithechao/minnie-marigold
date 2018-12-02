@@ -475,7 +475,7 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
     client.user.setStatus("invisible")
         .catch(msgSendError);
 
-    let k = getArrayRandom(props.phrases.all);
+    let k = getPhraseRandom("shutdown", "all");
     if(k)
     {
         msg.channel.send(k.value, {
