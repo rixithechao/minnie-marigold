@@ -923,9 +923,8 @@ client.on("message", msg =>
     try
     {
         // Don't process own messages the same way as others'
-        if (msg.author !== client.user)
+        if (msg.author !== client.user && !msg.webhookID)
         {
-
             // Log the message
             console.log("------------------------");
             if (!msg.member)
@@ -1168,7 +1167,7 @@ client.on("message", msg =>
     {
         //dummying this stuff out for the time being so this bot isn't kicked out of codehaus
 
-		//keywordPost(msg.channel, "error");
+        //keywordPost(msg.channel, "error");
         //msg.channel.send("```" + err + "```");
         console.log(err);
     }
