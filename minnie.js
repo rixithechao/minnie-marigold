@@ -1091,19 +1091,28 @@ client.on("message", msg =>
                     if (matches != null)
                     {
                         detectedTypes[k] = matches.length;
-                        consoleLog("Matched category " + k + ": " + detectedTypes[k].toString())
+                        consoleLog("Matched category " + k + ": " + detectedTypes[k].toString());
                     }
                 }
 
                 // Special handling
                 if (msg.cleanContent.endsWith("?"))
+                {
+                    consoleLog("Question detected, +1 to type about: " + detectedTypes[k].toString()) + " total");
                     detectedTypes.about += 1;
+                }
                 if (msg.cleanContent.endsWith("!"))
                 {
                     if (detectedTypes.threat > detectedTypes.brag  &&  detectedTypes.threat > 0)
+                    {
+                        consoleLog("Ends with !, seems threatening so +1 to type threat: " + detectedTypes.threat.toString()) + " total");
                         detectedTypes.threat += 1;
+                    }
                     else
+                    {
+                        consoleLog("Ends with !, seems flattering so +1 to type brag: " + detectedTypes.brag.toString()) + " total");
                         detectedTypes.brag += 1;
+                    }
                 }
 
                 // Get highest values
@@ -1119,10 +1128,10 @@ client.on("message", msg =>
                 for (let k in detectedTypes)
                 {
                     let val = detectedTypes[k];
-                    if (val === highestNum && k !== "indirect" && k !== "bot")
+                    if (val == highestNum && k !== "indirect" && k !== "bot")
                     {
                         highestTied.push(k);
-                        logString = logString + k + ",";
+                        logString = logString + k + "(" + val.toString() + ")" + ",";
                     }
                 }
                 consoleLog(logString);
