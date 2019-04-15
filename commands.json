@@ -272,6 +272,15 @@
 	},
 
 
+
+
+	"logs": {
+		"category": "mod-only",
+		"info": "Dump the most recent messages logged to the console.  You can specify the number of entries (10 by default).",
+		"function": "postLogs",
+		"auth": "owner"
+	},
+
 	"quote": {
 		"category": "mod-only",
 		"info": "Quote a post (to verify I know it exists)",
@@ -444,6 +453,7 @@
 		"info": "Dancing mania (also known as dancing plague, choreomania, St. John's Dance and St. Vitus's Dance) was a phenomenon that occurred primarily in mainland Europe between the 14th and 17th centuries. It involved groups of people dancing erratically, sometimes thousands at a time. The mania affected men, women, and children who danced until they collapsed from exhaustion. One of the first major outbreaks was in Aachen, in the Holy Roman Empire, in 1374, and it quickly spread throughout Europe; one particularly notable outbreak occurred in Strasbourg in 1518, also in the Holy Roman Empire.  Affecting thousands of people across several centuries, dancing mania was not an isolated event, and was well documented in contemporary reports. It was nevertheless poorly understood, and remedies were based on guesswork. Generally, musicians accompanied dancers, to help ward off the mania, but this tactic sometimes backfired by encouraging more to join in.",
 		"phrases": {
 			"all": [
+				"https://youtu.be/5D3tXYg6WjY",
 				"https://www.youtube.com/watch?v=YAx2J5OGRdw",
 				"https://www.youtube.com/watch?v=c5G5bD2Do-k",
 				"https://www.youtube.com/watch?v=ieQ1rAIjzXc",

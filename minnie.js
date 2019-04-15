@@ -70,10 +70,20 @@ let sayUser = new Array(0);
 let sayMember = new Array(0);
 let sayMessage = new Array(0);
 
+let logBackup = new Array(0);
+
 
 // Set up regexp stuff
 let keywordRegex = {_thing: true};
 updateRegex();
+
+
+// Set up new custom logging function so we can view the logs in DM if necessary
+function consoleLog(loggedText)
+{
+    console.log(loggedText);
+    logBackup.splice(0, 0, loggedText);
+}
 
 function isChannelAllowed(channel)
 {
@@ -101,12 +111,12 @@ function msgSendError(error, message)
 {
     if (error)
     {
-        console.log("Fail to send message: " + message);
+        consoleLog("Fail to send message: " + message);
         let ErrorText = "Can't send message because: " + error;
-        console.log(ErrorText);
+        consoleLog(ErrorText);
         if (++msgFailedAttempts > 2)
         {
-            console.log("Trying to relogin...");
+            consoleLog("Trying to relogin...");
             client.login(loginId).catch(msgSendError);
             msgFailedAttempts = 0;
         }
@@ -141,14 +151,14 @@ function reactFromArray(message, array)
     if (array == null)
     {
         array = emoteReacts.default
-        //console.log("No valid array provided, attempting to use default emote array")
+        //consoleLog("No valid array provided, attempting to use default emote array")
     }
-    //console.log("Array values: "+array.toString())
+    //consoleLog("Array values: "+array.toString())
 
     let emote = getArrayRandom(array).value;
     if (emote != null)
     {
-        //console.log("Attempting to react with "+emote.toString())
+        //consoleLog("Attempting to react with "+emote.toString())
         message.react(emote);
 
         /*
@@ -160,19 +170,19 @@ function reactFromArray(message, array)
 
     }
     else
-        console.log("Couldn't get a valid emoji string")
+        consoleLog("Couldn't get a valid emoji string")
 }
 
 function updateJson(data, name)
 {
-    console.log("UPDATING JSON: " + name);
+    consoleLog("UPDATING JSON: " + name);
     fs.writeFileSync(name + ".json", JSON.stringify(data));
     //localStorage.setItem(name, JSON.stringify(data));
 }
 
 function updateServerData(guild)
 {
-    console.log("UPDATING SERVER DATA: " + guild.name);
+    consoleLog("UPDATING SERVER DATA: " + guild.name);
     if (serverdata[guild.id] == null)
     {
         serverdata[guild.id] = {};
@@ -195,7 +205,7 @@ function updateServerData(guild)
     // Channel data
     guild.channels.forEach(channel =>
     {
-        console.log("UPDATING SERVER'S CHANNEL DATA: " + channel.id.toString() + "(" + channel.name + ")");
+        consoleLog("UPDATING SERVER'S CHANNEL DATA: " + channel.id.toString() + "(" + channel.name + ")");
 
         if (guildEntry.channels[channel.id] == null)
             guildEntry.channels[channel.id] = {};
@@ -222,11 +232,11 @@ function updateUserData(user)
 {
     if (user == null)
     {
-        console.log("ATTEMPTED TO UPDATE USER DATA BUT INVALID USER GIVEN");
+        consoleLog("ATTEMPTED TO UPDATE USER DATA BUT INVALID USER GIVEN");
         return;
     }
 
-    console.log("UPDATING USER DATA");// + user.username);
+    consoleLog("UPDATING USER DATA");// + user.username);
     if (userdata[user.id] == null)
     {
         userdata[user.id] = {};
@@ -247,7 +257,7 @@ function updateRegex()
     for (let k in keywords)
     {
         keywordRegex[k] = new RegExp(keywords[k], 'img');
-        //console.log ("Updated regex " + k + ": "+keywordRegex[k].toString())
+        //consoleLog ("Updated regex " + k + ": "+keywordRegex[k].toString())
     }
 }
 
@@ -288,7 +298,7 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
             args.midSequence = false;
             if (/*!quietMode  &&  */(!args.midSequence || args.sequenceLevel > 0 || firstOfSequence))
             {
-                console.log("SENDING MESSAGE: " + currentMsg);
+                consoleLog("SENDING MESSAGE: " + currentMsg);
                 args.channel.send(currentMsg, {split: true /*tts:(ttsActive==true)*/}).catch(msgSendError);
                 if (nextMsg !== "")
                 {
@@ -329,14 +339,14 @@ function getPhraseRandom(keyword, category)
         if (commands[keyword].phrases[category] == null)
             category = "all";
 
-        console.log("Getting random phrase: keyword=" + keyword + ", category=" + category);
+        consoleLog("Getting random phrase: keyword=" + keyword + ", category=" + category);
 
         let postText = getArrayRandom(commands[keyword].phrases[category]).value;
 
         let newPostText = postText.replace(/<phrase [^\s]+>/gi, function (x)
         {
             let replText = getPhraseRandom(x.slice(8, -1));
-            console.log("Replacement made: " + replText);
+            consoleLog("Replacement made: " + replText);
             return replText
         });
 
@@ -353,7 +363,7 @@ let helpCategories = {};
 
 function buildHelpCategories()
 {
-    console.log("START CREATING COMMAND LISTS FOR HELP");
+    consoleLog("START CREATING COMMAND LISTS FOR HELP");
     helpCategories = {};
     for (let item in commands)
     {
@@ -365,17 +375,17 @@ function buildHelpCategories()
                 if (helpCategories[cmdProps.category] == null)
                 {
                     helpCategories[cmdProps.category] = [];
-                    console.log("ADDING CATEGORY " + cmdProps.category);
+                    consoleLog("ADDING CATEGORY " + cmdProps.category);
                 }
 
                 helpCategories[cmdProps.category].push(item);
-                console.log("ADDING COMMAND " + item + " TO CATEGORY " + cmdProps.category);
+                consoleLog("ADDING COMMAND " + item + " TO CATEGORY " + cmdProps.category);
             }
         }
         else
-            console.log("UNABLE TO GET PROPERTIES FOR " + item);
+            consoleLog("UNABLE TO GET PROPERTIES FOR " + item);
     }
-    console.log("DONE CREATING COMMAND LISTS");
+    consoleLog("DONE CREATING COMMAND LISTS");
 }
 
 
@@ -402,7 +412,7 @@ cmdFuncts.toggleTTS = function (msg, cmdStr, argStr, props)
 /*
 cmdFuncts.gitPull = function (msg, cmdStr, argStr, props)
 {
-    console.log("Pulling a git");
+    consoleLog("Pulling a git");
     exec('git', ["pull", "origin", "master"], function(err, data)
     {
         if(err == null)
@@ -440,7 +450,7 @@ cmdFuncts.emojiCommands = function (msg, cmdStr, argStr, props)
     }
     client.user.setStatus("invisible")
     msg.channel.send(getArrayRandom(props.phrases).value, {tts:(ttsActive==true)})
-    console.log("Shutting down");
+    consoleLog("Shutting down");
 
     client.setTimeout(function(){
             process.exit(1);
@@ -482,7 +492,7 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
             tts: (ttsActive === true)
         }).catch(msgSendError);
     }
-    console.log("Shutting down");
+    consoleLog("Shutting down");
 
     client.setTimeout(function ()
     {
@@ -529,7 +539,7 @@ function clearReactsUpTo(msg, argList)
     }
 
     debugString += "; " + argList.length.toString() + " total";
-    console.log(debugString);
+    consoleLog(debugString);
 
     let messageCounter = 0;
     let matchedMessageCount = 0;
@@ -542,24 +552,24 @@ function clearReactsUpTo(msg, argList)
             for (i = 0; i < messageArr.length; i++)
             {
                 let message = messageArr[i];
-                console.log("MESSAGE: " + message.content);
+                consoleLog("MESSAGE: " + message.content);
                 messageCounter++;
                 let matchCounter = 0;
                 let reactionArray = message.reactions.array();
                 for (i2 = 0; i2 < reactionArray.length; i2++)
                 {
                     let reaction = reactionArray[i2];
-                    console.log("REACTION FOUND: name=" + reaction.emoji.name + ", tostring=" + reaction.emoji.toString());
+                    consoleLog("REACTION FOUND: name=" + reaction.emoji.name + ", tostring=" + reaction.emoji.toString());
                     if (argList.includes(reaction.emoji.name))
                     {
-                        console.log("REACTION MATCH");
+                        consoleLog("REACTION MATCH");
                         matchCounter++;
                         matchedReactionsCount++;
                     }
                 }
                 if (matchCounter === argList.length)
                 {
-                    console.log("ALL MATCHED");
+                    consoleLog("ALL MATCHED");
                     message.clearReactions().catch(msgSendError);
                     lastReactClearedId = message.id;
                     if (i % 10 === 0 || i === messageArr.length - 1)
@@ -595,7 +605,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
             for (i = 0; i < argList.length; i++)
             {
                 let id = argList[i];
-                console.log("ATTEMPTING TO CLEAR MESSAGE " + id);
+                consoleLog("ATTEMPTING TO CLEAR MESSAGE " + id);
                 clearReactionsInMessage(msg, id);
             }
             break;
@@ -615,7 +625,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 
 cmdFuncts.updateAndRestart = function (msg, cmdStr, argStr, props)
 {
-    console.log("Pulling a git");
+    consoleLog("Pulling a git");
     exec('git', ["pull", "origin", "master"], function (err, data)
     {
         if (err == null)
@@ -624,7 +634,7 @@ cmdFuncts.updateAndRestart = function (msg, cmdStr, argStr, props)
 
             client.user.setStatus("invisible").catch(msgSendError);
             keywordPost(msg.channel, "exit");
-            console.log("Shutting down");
+            consoleLog("Shutting down");
 
             client.setTimeout(function ()
             {
@@ -655,7 +665,7 @@ cmdFuncts.reactionSpam = function (msg, cmdStr, argStr, props)
         if (Math.random() > 0.5)
             emoteCategory = "brag";
 
-        console.log("emote category: " + emoteCategory);
+        consoleLog("emote category: " + emoteCategory);
         reactFromArray(msg, emoteReacts[emoteCategory]);
     }
 };
@@ -664,6 +674,29 @@ cmdFuncts.setGame = function (msg, cmdStr, argStr, props)
 {
     client.user.setActivity(argStr).catch(msgSendError);
 };
+
+cmdFuncts.postLogs = function (msg, cmdStr, argStr, props)
+{
+    let lineCount = 10;
+    if  (argStr !== "")
+        lineCount = Number(argStr);
+
+    if (logBackup.length > 0)
+    {
+        let comboString = "";
+        for (let i = 0;  i < Math.min(logBackup.length,lineCount);  i++)
+        {
+            comboString = comboString + "\n" + logBackup[i]
+        }
+
+        sendMsg({
+            channel: msg.channel,
+            msg: "```" + comboString + "\n```"
+        });
+    }
+    else
+        sendMsg({channel: msg.channel, msg: "Oh my, it doesn't look like anything was logged!  That's probably not good..."});
+}
 
 cmdFuncts.revealSay = function (msg, cmdStr, argStr, props)
 {
@@ -699,7 +732,7 @@ cmdFuncts.forceSay = function (msg, cmdStr, argStr, props)
     sayMessage.splice(0, 0, setStr);
     msg.delete(0);
 
-    console.log("FORCESAY: " + msg.channel.id.toString() + ", " + setStr);
+    consoleLog("FORCESAY: " + msg.channel.id.toString() + ", " + setStr);
     sendMsg({channel: msg.channel, msg: setStr})
 };
 
@@ -726,7 +759,7 @@ cmdFuncts.toggleChannel = function (msg, cmdStr, argStr, props)
     }
     else
     {
-        console.log("Attempting to toggle posting in nonexistent channel.");
+        consoleLog("Attempting to toggle posting in nonexistent channel.");
         sendMsg({
             channel: msg.channel,
             msg: "What?  I don't see that channel...  Are you sure you spelled it correctly?"
@@ -880,16 +913,16 @@ client.on("messageReactionAdd", (reactionRef, userRef) =>
         if (authorized)
             usernameStr = "AUTHORIZED USER " + userRef.username;
 
-        console.log("REACTION ADDED BY " + usernameStr + ": " + reactionRef.emoji.toString() + ", " +
+        consoleLog("REACTION ADDED BY " + usernameStr + ": " + reactionRef.emoji.toString() + ", " +
             reactionRef.emoji.id + ", " + reactionRef.emoji.identifier + ", " + reactionRef.emoji.name);
-        console.log(" ");
+        consoleLog(" ");
 
         if (reactionRef.emoji.toString() === cleanupTrigger)
         {
-            console.log("Matches cleanup trigger");
+            consoleLog("Matches cleanup trigger");
             if (authorized)
             {
-                console.log("Cleanup triggered by authorized user");
+                consoleLog("Cleanup triggered by authorized user");
                 // Start comparing emojis
                 /*
                 let message = reactionRef.message
@@ -926,11 +959,11 @@ client.on("message", msg =>
         if (msg.author !== client.user && !msg.webhookID)
         {
             // Log the message
-            console.log("------------------------");
+            consoleLog("------------------------");
             if (!msg.member)
-                console.log(msg.member.displayName + " said: " + msg.cleanContent);
+                consoleLog(msg.member.displayName + " said: " + msg.cleanContent);
             else
-                console.log("[unknown] said: " + msg.cleanContent);
+                consoleLog("[unknown] said: " + msg.cleanContent);
 
             // Authority check
             let authorized = ((ownerIds.indexOf(msg.author.id) !== -1) || (msg.member && msg.member.roles.has(modRoleId)));
@@ -940,17 +973,17 @@ client.on("message", msg =>
                 if (authordata["authorized"] === true)
                     authorized = true;
                 else
-                    console.log("Message's author has no authorization info specified in their userdata!");
+                    consoleLog("Message's author has no authorization info specified in their userdata!");
 
             }
             else
-                console.log("Message's author has no authorization info specified in their userdata!");
+                consoleLog("Message's author has no authorization info specified in their userdata!");
 
 
             // Direct commands
             if (msg.cleanContent.startsWith("/minnie "))
             {
-                console.log("COMMAND DETECTED");
+                consoleLog("COMMAND DETECTED");
 
                 let cleanMsg = msg.cleanContent;
                 let inputStr = cleanMsg.substr(8);
@@ -962,7 +995,7 @@ client.on("message", msg =>
                     cmdStr = inputStr.substr(0, inputStr.indexOf(' '));
                     argStr = inputStr.substr(inputStr.indexOf(' ') + 1)
                 }
-                console.log("INPUT: " + inputStr + ", COMMAND: " + cmdStr + ", ARGS: " + argStr);
+                consoleLog("INPUT: " + inputStr + ", COMMAND: " + cmdStr + ", ARGS: " + argStr);
 
                 if (commands[cmdStr] != null)
                 {
@@ -977,7 +1010,7 @@ client.on("message", msg =>
 
                     if (authLevel != null)
                     {
-                        console.log("AUTHORIZATION NEEDED: " + authLevel);
+                        consoleLog("AUTHORIZATION NEEDED: " + authLevel);
                         matchesAuthLevel = false;
                         let authTable = authorizeData[authLevel];
                         if (authTable == null)
@@ -995,17 +1028,17 @@ client.on("message", msg =>
                         functPtr = cmdFuncts[functStr]
                     }
 
-                    console.log("Authorized by userdata: " + authorized.toString() + ";  Authorized by named group: " + matchesAuthLevel.toString());
+                    consoleLog("Authorized by userdata: " + authorized.toString() + ";  Authorized by named group: " + matchesAuthLevel.toString());
                     if (matchesAuthLevel || authorized)
                     {
                         if (props.needsArgs != null && (argStr === "" || argStr == null))
                         {
-                            console.log("Arguments not provided for a command that needs them");
+                            consoleLog("Arguments not provided for a command that needs them");
                             keywordPost(msg.channel, "noArgs")
                         }
                         else if (functPtr != null)
                         {
-                            console.log("Successful command call");
+                            consoleLog("Successful command call");
                             functPtr(msg, cmdStr, argStr, props)
                         }
                         else if (functStr !== "")
@@ -1017,13 +1050,13 @@ client.on("message", msg =>
                     }
                     else
                     {
-                        console.log("Unauthorized command attempted!");
+                        consoleLog("Unauthorized command attempted!");
                         cmdFuncts.sendResponse(msg, "decline", "", commands["decline"]);
                     }
                 }
                 else
                 {
-                    console.log("commands[" + cmdStr + "] == null!");
+                    consoleLog("commands[" + cmdStr + "] == null!");
                     cmdFuncts.sendResponse(msg, "decline", "", commands["decline"]);
                 }
 
@@ -1046,7 +1079,7 @@ client.on("message", msg =>
                 let words = msg.cleanContent.toLowerCase().split(" ");
                 let detectedTypes = {};
 
-                // Remove every /knux from the string
+                // Remove every /minnie from the string
                 messageStr = messageStr.replace(/\/minnie/g, "");
 
                 // Count matches
@@ -1058,7 +1091,7 @@ client.on("message", msg =>
                     if (matches != null)
                     {
                         detectedTypes[k] = matches.length;
-                        console.log("Matched category " + k + ": " + detectedTypes[k].toString())
+                        consoleLog("Matched category " + k + ": " + detectedTypes[k].toString())
                     }
                 }
 
@@ -1067,7 +1100,7 @@ client.on("message", msg =>
                     detectedTypes.about += 1;
                 if (msg.cleanContent.endsWith("!"))
                 {
-                    if (detectedTypes.threat > detectedTypes.brag)
+                    if (detectedTypes.threat > detectedTypes.brag  &&  detectedTypes.threat > 0)
                         detectedTypes.threat += 1;
                     else
                         detectedTypes.brag += 1;
@@ -1092,12 +1125,17 @@ client.on("message", msg =>
                         logString = logString + k + ",";
                     }
                 }
-                console.log(logString);
+                consoleLog(logString);
 
 
                 // Choose random category from the ones that tied
                 if (highestTied.length > 0)
-                    highestRandString = highestTied[Math.floor(Math.random() * (highestTied.length))];
+                {
+                    if (detectedTypes.threat > 0)
+                        highestRandString = "threat";
+                    else
+                        highestRandString = highestTied[Math.floor(Math.random() * (highestTied.length))];
+                }
                 else
                     highestRandString = "brag";
 
@@ -1108,22 +1146,22 @@ client.on("message", msg =>
                 // If at or about the bot...
                 if (aboutMe)
                 {
-                    console.log("I think I'll respond to this message.");
+                    consoleLog("I think I'll respond to this message.");
 
                     // Initialize sentiment analysis vars
                     let tone = "neutral";  // neutral, insult, challenge, question, praise, request
 
                     // Either reply with an emoji reaction or response message
 
-                    if (Math.random() > 0.5 && emoteReacts[highestRandString] != null)
-                    {
+                    //if (Math.random() > 0.5 && emoteReacts[highestRandString] != null)
+                    //{
                         // ---- Do nothing for now ----
 
                         // let emoteCategory = emoteReacts[highestRandString];
-                        // console.log("emote category: " + highestRandString);
+                        // consoleLog("emote category: " + highestRandString);
                         // reactFromArray(msg, emoteCategory);
-                    }
-                    else
+                    //}
+                    //else
                         keywordPost(msg.channel, highestRandString);
                 }
 
@@ -1136,14 +1174,14 @@ client.on("message", msg =>
                     {
                         // ---- Do nothing for now ----
                         // let emoteCategory = emoteReacts[highestRandString];
-                        // console.log("emote category: " + highestRandString);
+                        // consoleLog("emote category: " + highestRandString);
                         // reactFromArray(msg, emoteCategory);
                     }
 
                     // Occasionally respond with "& Knuckles" anyway
                     /*
                     andCount -= 1;
-                    console.log("And count: " + andCount.toString());
+                    consoleLog("And count: " + andCount.toString());
                     if (andCount <= 0)
                     {
                         let timeSinceLastAnd = client.uptime - lastAndTime;
@@ -1154,12 +1192,12 @@ client.on("message", msg =>
                             andCount = Math.floor((Math.random() * 35) + 15);
                         }
                         else
-                            console.log("Time since last and: " + timeSinceLastAnd.toString());
+                            consoleLog("Time since last and: " + timeSinceLastAnd.toString());
                     }
                     */
                 }
             }
-            console.log(" ");
+            consoleLog(" ");
         }
         prevAuthor = msg.author;
 
@@ -1169,7 +1207,7 @@ client.on("message", msg =>
 
         //keywordPost(msg.channel, "error");
         //msg.channel.send("```" + err + "```");
-        console.log(err);
+        consoleLog(err);
     }
 });
 
@@ -1190,7 +1228,7 @@ client.on("guildMemberAdd", member => {
 	catch(err)
 	{
 		//channelGen.sendMessage("Oh, I tried to welcome a new member but something went wrong!");
-		console.log(err);
+		consoleLog(err);
 	}
 });
 
@@ -1204,7 +1242,7 @@ client.on('ready', () =>
     {
         notify.ready();
         const watchdogInterval = 2800;
-        console.log('Initializing SystemD WatchDog with ' + watchdogInterval + ' millseconds internal ...');
+        consoleLog('Initializing SystemD WatchDog with ' + watchdogInterval + ' millseconds internal ...');
         notify.startWatchdogMode(watchdogInterval);
     }
 
@@ -1215,14 +1253,14 @@ client.on('ready', () =>
     {
         let perms = 130112;
         let url = "https://discordapp.com/oauth2/authorize?client_id=" + client.user.id + "&scope=bot&permissions=" + perms;
-        console.log("I'm not at the server!!! INVITE ME PLEASE!!! (Then, restart)\n" + url);
+        consoleLog("I'm not at the server!!! INVITE ME PLEASE!!! (Then, restart)\n" + url);
         return;
     }
 
     let myChannel = myGuild.channels.get(startingChannelId);
     if(!myChannel)
     {
-        console.log("I don't know this channel! IT'S NOSENSE!");
+        consoleLog("I don't know this channel! IT'S NONSENSE!");
         return;
     }
 
@@ -1241,8 +1279,8 @@ client.on('ready', () =>
 
     buildHelpCategories();
 
-    console.log('READY; ' + introString);
-    console.log(' ');
+    consoleLog('READY; ' + introString);
+    consoleLog(' ');
 });
 
 
@@ -1254,8 +1292,8 @@ setInterval(function()
     {
         global.gc();
     } else {
-        console.log('Garbage collection unavailable.  Pass --expose-gc '
+        consoleLog('Garbage collection unavailable.  Pass --expose-gc '
             + 'when launching node to enable forced garbage collection.');
     }
-    console.log('Memory usage:', process.memoryUsage());
+    consoleLog('Memory usage:', process.memoryUsage());
 }, 1800000); //Every half of hour
