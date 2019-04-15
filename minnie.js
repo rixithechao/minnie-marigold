@@ -730,7 +730,7 @@ cmdFuncts.revealSay = function (msg, cmdStr, argStr, props)
 cmdFuncts.forceSay = function (msg, cmdStr, argStr, props)
 {
     // Get substring to say
-    let setStr = argStr;
+    let setStr = msg.cleanContent;
 
     // Replace phrase tags with the corresponding phrase
     setStr = setStr.replace(/\^[^\^]*\^/gi, function myFunction(x)
