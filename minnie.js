@@ -993,12 +993,12 @@ client.on("message", msg =>
 
 
             // Direct commands
-            if (msg.cleanContent.startsWith("/minnie "))
+            if (msg.content.startsWith("/minnie "))
             {
                 consoleLog("COMMAND DETECTED");
 
-                let cleanMsg = msg.cleanContent;
-                let inputStr = cleanMsg.substr(8);
+                let inputMsg = msg.content;
+                let inputStr = inputMsg.substr(8);
 
                 let cmdStr = inputStr;
                 let argStr = "";
@@ -1087,8 +1087,8 @@ client.on("message", msg =>
 
                 // Parse message
                 let aboutMe = false;
-                let messageStr = msg.cleanContent.toLowerCase();
-                let words = msg.cleanContent.toLowerCase().split(" ");
+                let messageStr = msg.content.toLowerCase();
+                let words = msg.content.toLowerCase().split(" ");
                 let detectedTypes = {};
 
                 // Remove every /minnie from the string
@@ -1108,12 +1108,12 @@ client.on("message", msg =>
                 }
 
                 // Special handling
-                if (msg.cleanContent.endsWith("?"))
+                if (msg.content.endsWith("?"))
                 {
                     consoleLog("Question detected, +1 to type about: " + detectedTypes[k].toString() + " total");
                     detectedTypes.about += 1;
                 }
-                if (msg.cleanContent.endsWith("!"))
+                if (msg.content.endsWith("!"))
                 {
                     if (detectedTypes.threat > detectedTypes.brag  &&  detectedTypes.threat > 0)
                     {
