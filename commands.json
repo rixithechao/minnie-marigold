@@ -790,7 +790,8 @@
 		"category": "whitelist",
 		"auth": "say",
 		"info": "Forces me to say stuff.  Use common sense with this command.",
-		"function": "forceSay"
+		"function": "forceSay",
+		"clean": true
 	},
 
 	"reveal": {

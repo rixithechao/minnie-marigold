@@ -730,7 +730,7 @@ cmdFuncts.revealSay = function (msg, cmdStr, argStr, props)
 cmdFuncts.forceSay = function (msg, cmdStr, argStr, props)
 {
     // Get substring to say
-    let setStr = msg.cleanContent;
+    let setStr = argStr;
 
     // Replace phrase tags with the corresponding phrase
     setStr = setStr.replace(/\^[^\^]*\^/gi, function myFunction(x)
@@ -998,14 +998,18 @@ client.on("message", msg =>
                 consoleLog("COMMAND DETECTED");
 
                 let inputMsg = msg.content;
+                let cleanMsg = msg.cleanContent;
                 let inputStr = inputMsg.substr(8);
+                let inputStrClean = cleanMsg.substr(8);
 
                 let cmdStr = inputStr;
                 let argStr = "";
+                let argStrClean = "";
                 if (inputStr.indexOf(' ') !== -1)
                 {
                     cmdStr = inputStr.substr(0, inputStr.indexOf(' '));
-                    argStr = inputStr.substr(inputStr.indexOf(' ') + 1)
+                    argStr = inputStr.substr(inputStr.indexOf(' ') + 1);
+                    argStrClean = inputStrClean.substr(inputStrClean.indexOf(' ') + 1);
                 }
                 consoleLog("INPUT: " + inputStr + ", COMMAND: " + cmdStr + ", ARGS: " + argStr);
 
@@ -1034,6 +1038,12 @@ client.on("message", msg =>
                     else
                         authLevel = "none";
 
+                    let requireClean = false;
+                    if (props["clean"] != null)
+                    {
+                        requireClean = props["clean"];
+                    }
+
                     if (props["function"] != null)
                     {
                         functStr = props["function"];
@@ -1051,7 +1061,7 @@ client.on("message", msg =>
                         else if (functPtr != null)
                         {
                             consoleLog("Successful command call");
-                            functPtr(msg, cmdStr, argStr, props)
+                            functPtr(msg, cmdStr, (requireClean ? argStrClean : argStr), props)
                         }
                         else if (functStr !== "")
                         //keywordPost (channel, keyword, category)
