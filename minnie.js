@@ -290,7 +290,7 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 
     if (args.isCodeBlock == true)
     {
-        currentMsg += "\n```"
+        currentMsg += "\n```";
     }
 
     if (args.waitRange == null)
@@ -1110,19 +1110,19 @@ client.on("message", msg =>
                 // Special handling
                 if (msg.cleanContent.endsWith("?"))
                 {
-                    consoleLog("Question detected, +1 to type about: " + detectedTypes[k].toString()) + " total");
+                    consoleLog("Question detected, +1 to type about: " + detectedTypes[k].toString() + " total");
                     detectedTypes.about += 1;
                 }
                 if (msg.cleanContent.endsWith("!"))
                 {
                     if (detectedTypes.threat > detectedTypes.brag  &&  detectedTypes.threat > 0)
                     {
-                        consoleLog("Ends with !, seems threatening so +1 to type threat: " + detectedTypes.threat.toString()) + " total");
+                        consoleLog("Ends with !, seems threatening so +1 to type threat: " + detectedTypes.threat.toString() + " total");
                         detectedTypes.threat += 1;
                     }
                     else
                     {
-                        consoleLog("Ends with !, seems flattering so +1 to type brag: " + detectedTypes.brag.toString()) + " total");
+                        consoleLog("Ends with !, seems flattering so +1 to type brag: " + detectedTypes.brag.toString() + " total");
                         detectedTypes.brag += 1;
                     }
                 }
