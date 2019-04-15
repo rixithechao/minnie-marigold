@@ -270,7 +270,7 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
     let firstOfSequence = false;
     let currentMsg = "";
 
-    if  (args.isCodeBlock == true)
+    if  (args.isCodeBlock === true)
         currentMsg = "```\n";
     currentMsg += args.msg;
 
@@ -288,7 +288,7 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
         currentMsg = currentMsg.replace(/<mention>/gi, "@" + userToMention.username + "#" + userToMention.discriminator + " ");
     }
 
-    if (args.isCodeBlock == true)
+    if (args.isCodeBlock === true)
     {
         currentMsg += "\n```";
     }
@@ -1140,7 +1140,7 @@ client.on("message", msg =>
                 for (let k in detectedTypes)
                 {
                     let val = detectedTypes[k];
-                    if (val == highestNum && k !== "indirect" && k !== "bot")
+                    if (val === highestNum && k !== "indirect" && k !== "bot")
                     {
                         highestTied.push(k);
                         logString += k + "(" + val.toString() + ")" + ",";
