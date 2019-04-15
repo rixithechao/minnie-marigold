@@ -268,7 +268,12 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
         args.sequenceLevel = 0;
 
     let firstOfSequence = false;
-    let currentMsg = args.msg;
+    let currentMsg = "";
+
+    if  (args.isCodeBlock == true)
+        currentMsg = "```\n";
+    currentMsg += args.msg;
+
     let nextMsg = "";
     if (currentMsg.includes("<page>"))
     {
@@ -281,6 +286,11 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
     if (currentMsg.includes("<mention>")  &&  args.userToMention != null)
     {
         currentMsg = currentMsg.replace(/<mention>/gi, "@" + userToMention.username + "#" + userToMention.discriminator + " ");
+    }
+
+    if (args.isCodeBlock == true)
+    {
+        currentMsg += "\n```"
     }
 
     if (args.waitRange == null)
@@ -307,7 +317,8 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
                         msg: nextMsg,
                         waitRange: 0.5,
                         extraPause: 500,
-                        sequenceLevel: args.sequenceLevel + 1
+                        sequenceLevel: args.sequenceLevel + 1,
+                        isCodeBlock: args.isCodeBlock
                     });
                     midSequence = true
                 }
@@ -686,12 +697,13 @@ cmdFuncts.postLogs = function (msg, cmdStr, argStr, props)
         let comboString = "";
         for (let i = 0;  i < Math.min(logBackup.length,lineCount);  i++)
         {
-            comboString = comboString + "\n" + logBackup[i]
+            comboString += "\n" + logBackup[i]
         }
 
         sendMsg({
             channel: msg.channel,
-            msg: "```" + comboString + "\n```"
+            msg: comboString,
+            isCodeBlock: true
         });
     }
     else
@@ -1131,7 +1143,7 @@ client.on("message", msg =>
                     if (val == highestNum && k !== "indirect" && k !== "bot")
                     {
                         highestTied.push(k);
-                        logString = logString + k + "(" + val.toString() + ")" + ",";
+                        logString += k + "(" + val.toString() + ")" + ",";
                     }
                 }
                 consoleLog(logString);
