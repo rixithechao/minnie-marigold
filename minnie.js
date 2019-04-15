@@ -1103,7 +1103,7 @@ client.on("message", msg =>
                     if (matches != null)
                     {
                         detectedTypes[k] = matches.length;
-                        consoleLog("Matched category " + k + ": " + detectedTypes[k].toString());
+                        consoleLog("Matched category " + k + ": " + detectedTypes[k].toString() + "(" + matches.toString() + ")");
                     }
                 }
 
