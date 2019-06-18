@@ -158,8 +158,6 @@
 		}
 	},
 
-
-
 	"exit": {
 		"phrases": {
 			"all": [
@@ -172,5 +170,5 @@
 				"Love to stay and chat, but I've got a gig to get to!"
 			]
 		}
-	},
+	}
 }
