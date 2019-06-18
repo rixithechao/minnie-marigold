@@ -42,8 +42,14 @@ let emoteReacts = {
 };
 
 // Other stuff
-let commands = JSON.parse(fs.readFileSync("commands.json", "utf8"));
-delete commands._example;
+let basecommands = JSON.parse(fs.readFileSync("commands.json", "utf8"));
+delete basecommands._example;
+let commands = basecommands;
+if(fs.existsSync("servercommands.json"))
+{
+	let servercommands = JSON.parse(fs.readFileSync("servercommands.json", "utf8"));
+	commands = {...basecommands, ...servercommands};
+}
 
 //let responses   = JSON.parse(fs.readFileSync("responses.json", "utf8"));
 let keywords = JSON.parse(fs.readFileSync("keywords.json", "utf8"));

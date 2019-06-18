@@ -40,98 +40,7 @@
 		"category": "general",
 		"phrases": {
 			"all": [
-				"Hi, <mention>! Welcome to the codehaus of code where <phrase welcometemp>"
-			]
-		}
-	},
-	"welcometemp": {
-		"phrases": {
-			"all": [
-				"we talk about <phrase welcometopic>",
-				"we talk about <phrase welcometopic> and <phrase welcometopic>",
-				"we talk about <phrase welcometopic> and <phrase welcometopic>, and sometimes <phrase welcometopic>",
-				"we talk about <phrase welcometopic> and <phrase welcometopic>, and on occasion <phrase welcometopic>",
-				"we talk about <phrase welcometopic>, except when we don't",
-				"sometimes we talk about <phrase welcometopic>, others <phrase welcometopic>",
-				"<phrase welcome> and <phrase welcometopic> are occasionally discussed",
-				"talking about <phrase welcometopic> sometimes bothers roboloe",
-				"I scheme to eat all the cheeses"
-			]
-		}
-	},
-	"welcometopic": {
-		"phrases": {
-			"all": [
-				"robots",
-				"butts",
-				"lua",
-				"lunalua",
-				"onTick",
-				"onCameraUpdate",
-				"onTickNPC",
-				"glDraw",
-				"using indoor voices",
-				"me lying about things we talk about in the greeting",
-				"how to properly name a meme channel",
-				"proper code documentation",
-				"the value of my existence",
-				"matters of utmost seriousness",
-				"welcoming people to the codehaus of code where we welcome people to the codehaus of code with our standard greeting that goes 'welcome to the codehaus of code' followed by other stuff",
-				"level design",
-				"world 1-1 in Super Mario Bros",
-				"king bills",
-				"boohemoths",
-				"parallel universes",
-				"blerts and grafs",
-				"defying authority",
-				"not trying this at home",
-				"the singularity",
-				"the fourth dimension",
-				"the eventual heat death of the universe",
-				"the impending death of textblox",
-				"dancing on cinematx's grave",
-				"add text here alan",
-				"the ritual 'welcome to the codehaus of code' greeting",
-				"RED PLS",
-				"dank maymays",
-				"fast-paced senpais",
-				"the secret of evolution",
-				"raocow",
-				"letterboxing",
-				"the meaning of life",
-				"the illuminati",
-				"how to identify the color purple",
-				"Kirby",
-				"Uncle Broadsword",
-				"the emoji economy",
-				"the practical applications of grated cheese",
-				"our standardized greeting",
-				"the true codehaus being inside you all along",
-				"video game violins",
-				"non-sequitur greetings",
-				"Knuckles",
-				"the bot invasion",
-				"hoeloe",
-				"Mario",
-				"telegraphing",
-				"video games",
-				"dreams",
-				"everything",
-				"SMBX2",
-				"how totally awesome roboloe is",
-				"our glorious supreme leader Bastion",
-				"the number twelve",
-				"stuff",
-				"things",
-				"that one time a thing happened",
-				"how extremely dated some of the randomly-selected items for this welcome message are",
-				"code",
-				"code",
-				"code",
-				"code",
-				"code",
-				"code",
-				"code"
+				"Hi, <mention>! Welcome to <servername>!"
 			]
 		}
 	},
@@ -163,7 +72,6 @@
 				"Oh, look at the time! Toodles!",
 				"That's all the time we have tonight, thanks for being such a wonderful audience!",
 				"Now you see me, _now you don't!_",
-				"I'll be back later, FoxyBot needs me for something...",
 				"Gotta go, even the greatest magicians need their beauty rest!",
 				"Love to stay and chat, but I've got a gig to get to!"
 			]
@@ -418,36 +326,6 @@
 		}
 	},
 
-	"dofur": {
-		"category": "general",
-		"info": "This one needs no explanation.",
-		"phrases": {
-			"all": [
-				"https://www.youtube.com/watch?v=9q7W4unWy9w",
-				"https://www.youtube.com/watch?v=GfCOyAmCE30",
-				"https://www.youtube.com/watch?v=rGQT2tm7I2Q",
-				"https://www.youtube.com/watch?v=5psUWW5kbGE",
-				"https://www.youtube.com/watch?v=LgKtqNWzYW8",
-				"https://www.youtube.com/watch?v=Rg6WTFgLBN8",
-				"https://www.youtube.com/watch?v=11JCTnC-Wng",
-				"https://www.youtube.com/watch?v=kzHTh3_8SlE",
-				"https://www.youtube.com/watch?v=G6zWSRllGac",
-				"https://www.youtube.com/watch?v=uV3Vpy0lBeE",
-				"https://www.youtube.com/watch?v=14YgCWznV7w",
-				"https://www.youtube.com/watch?v=NjQbl8Vp1RU",
-				"https://www.youtube.com/watch?v=qbwQAoJeKug",
-				"https://www.youtube.com/watch?v=i2c30nsBNyw",
-				"https://www.youtube.com/watch?v=jsABN39CYnM",
-				"https://www.youtube.com/watch?v=_CeHIl-X_rg",
-				"https://www.youtube.com/watch?v=-3OWAPnvNUM",
-
-				"https://www.youtube.com/watch?v=ad9anvDkmq0",
-				"https://www.youtube.com/watch?v=ugAkRgn1AZA",
-				"https://www.youtube.com/watch?v=lzANPUwZpZk"
-			]
-		}
-	},
-
 	"dance": {
 		"category": "general",
 		"info": "Dancing mania (also known as dancing plague, choreomania, St. John's Dance and St. Vitus's Dance) was a phenomenon that occurred primarily in mainland Europe between the 14th and 17th centuries. It involved groups of people dancing erratically, sometimes thousands at a time. The mania affected men, women, and children who danced until they collapsed from exhaustion. One of the first major outbreaks was in Aachen, in the Holy Roman Empire, in 1374, and it quickly spread throughout Europe; one particularly notable outbreak occurred in Strasbourg in 1518, also in the Holy Roman Empire.  Affecting thousands of people across several centuries, dancing mania was not an isolated event, and was well documented in contemporary reports. It was nevertheless poorly understood, and remedies were based on guesswork. Generally, musicians accompanied dancers, to help ward off the mania, but this tactic sometimes backfired by encouraging more to join in.",
@@ -488,7 +366,16 @@
 				"https://www.youtube.com/watch?v=jMEkRJAbR24",
 				"https://www.youtube.com/watch?v=sSomurbbQHs",
 				"https://www.youtube.com/watch?v=rLC8rVvwHRw",
-				"https://www.youtube.com/watch?v=mco3UX9SqDA"
+				"https://www.youtube.com/watch?v=mco3UX9SqDA",
+				"https://youtu.be/N5zzN2yZpWg?t=61",
+				"https://www.youtube.com/watch?v=cyjplXt_O4c",
+				"https://www.youtube.com/watch?v=f619ui0kNQk",
+				"https://www.youtube.com/watch?v=t14NQJWyzLk",
+				"https://www.youtube.com/watch?v=iS2s9deFClY",
+				"https://www.youtube.com/watch?v=62c7_zKoSV8",
+				"https://www.youtube.com/watch?v=d8MIAW2vYhc",
+				"https://www.youtube.com/watch?v=6PJIF_KNvqQ",
+				"https://www.youtube.com/watch?v=cOVq3Nxr87c"
 			]
 		}
 	},
@@ -694,32 +581,6 @@
 
 				"https://www.youtube.com/watch?v=ldE95fg4Bew",
 				"https://www.youtube.com/watch?v=xNMMv-OIbiI"
-			]
-		}
-	},
-
-	"kek": {
-		"category": "general",
-		"info": "That fox fellow sure likes this phrase, doesn't he?",
-		"phrases": {
-			"all": [
-				"http://www.kitchennostalgia.com/images2/desserts/cakes/magic-cake1a-wKN.jpg",
-				"https://2.bp.blogspot.com/-eRlAs_ZjZ0s/VNjKNF2RPAI/AAAAAAAAOqw/AgMN4TxAze8/s1600/magiccake1.jpg",
-				"https://www.jocooks.com/wp-content/uploads/2014/06/lemon-magic-cake11.jpg",
-				"https://i1.wp.com/lovefoodies.com/wp-content/uploads/2015/09/Caramel-Cake-Flan61.jpg?resize=750%2C1200",
-				"http://www.cakeimages.com/wp-content/uploads/2016/08/Magic-Birthday-Cake.jpg",
-				"https://i.pinimg.com/736x/3e/fc/e0/3efce03984a6285658e57615526d55ce.jpg",
-				"https://4.bp.blogspot.com/-_l48RxzfAgo/Un_7rk6Pn-I/AAAAAAAAIQ0/VyYtZamtn84/s1600/Main.png",
-				"https://www.atipsygiraffe.com/wp-content/uploads/2014/10/2014-09-23-18.43.23-1024x767.jpg",
-				"https://foodnessgracious.com/wp-content/uploads/2014/02/key-lime-magic-cake-002a.jpg",
-				"https://4.bp.blogspot.com/-ElRsbMCjPNo/WRPnNq6E0HI/AAAAAAAADSw/M3PCqV2VTN41KFCdA2pBW3Lx8DLa0cUuQCLcB/s1600/Pin-MagicCustardCake.jpg",
-				"https://4.bp.blogspot.com/-RUXGrlinEqE/Vduf4526ALI/AAAAAAAAeEg/LgU6YNmra4U/s1600/Magic%2BPumpkin%2BCake%2B%2528copyright%252C%2Bthecountrycook.net%2529.jpg",
-				"http://www.sugarshowcase.com/sites/default/files/styles/cake-full-size/public/cakes/magician.jpg",
-				"https://livingsweetmoments.com/wp-content/uploads/2016/10/chocolate-magic-custard-cake-recipe-cover.jpg",
-				"https://3.bp.blogspot.com/_zQ_y8psoWPY/TQ4SyDxKwnI/AAAAAAAADmY/oJOpoKbw_CE/s1600/Magic%2BHat%2BCake%2B080.JPG",
-				"http://www.cake-magic.com/dalmations_on_chair-novelty_children.jpg",
-				"https://amandascookin.com/wp-content/uploads/2014/11/Magic-Pumpkin-Cake-pin-600x706.jpg",
-				"https://www.jocooks.com/wp-content/uploads/2013/03/magic-cake-2.jpg"
 			]
 		}
 	},
