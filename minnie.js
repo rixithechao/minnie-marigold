@@ -387,7 +387,7 @@ function getPhraseRandom(keyword, category, shuffle)
     if (commands[keyword] != null)
     {
         if (commands[keyword].phrases == null)
-            keyword = "occasional";
+            category = "occasional";
 
         if (commands[keyword].phrases[category] == null)
             category = "all";
