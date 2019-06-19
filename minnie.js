@@ -316,7 +316,7 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
     }
     if (currentMsg.includes("<mention>"))
     {
-        currentMsg = currentMsg.replace(/<mention>/gi, (args.userToMention != null) ? "@" + userToMention.username + "#" + userToMention.discriminator + " " : "@NOBODY IN PARTICULAR");
+        currentMsg = currentMsg.replace(/<mention>/gi, (args.userToMention != null) ? "@" + args.userToMention.username + "#" + args.userToMention.discriminator + " " : "@NOBODY IN PARTICULAR");
     }
     if (currentMsg.includes("<servername>"))
     {
@@ -1370,6 +1370,7 @@ client.on("guildMemberAdd", member => {
 
 	try
 	{
+		consoleLog("Attempting to welcome new member " + member.user.username);
 		keywordPost(channelGen, "welcome", "all", member.user);
 	}
 	catch(err)
