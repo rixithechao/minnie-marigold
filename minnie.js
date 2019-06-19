@@ -607,7 +607,7 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 cmdFuncts.getJson = function (msg, cmdStr, argStr, props)
 {
 	msg.member.user.send("Attempting to send the data...");
-	msg.member.user.sendFile(new Discord.Attachment('./serverdata.json', 'serverdata.json')).catch(msgSendError);
+	msg.member.user.send(new Discord.Attachment('./serverdata.json', 'serverdata.json')).catch(msgSendError);
 }
 
 
