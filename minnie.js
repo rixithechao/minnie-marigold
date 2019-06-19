@@ -609,13 +609,13 @@ cmdFuncts.getJson = function (msg, cmdStr, argStr, props)
 	msg.member.user.send("Attempting to send the data...");
 	msg.member.user.sendFile("Here you go!", {
 		files: [{
-			attachment: fs.readFileSync("serverdata.json", "utf8"),
+			attachment: fs.readFileSync("./serverdata.json", "utf8"),
 			name: 'serverdata.json'
-		},
+		}/*,
 		{
-			attachment: fs.readFileSync("userdata.json", "utf8"),
+			attachment: fs.readFileSync("./userdata.json", "utf8"),
 			name: 'userdata.json'
-		}]
+		}*/]
 	})
 }
 
