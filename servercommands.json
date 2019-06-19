@@ -23,78 +23,107 @@
 		}
 	},
 	"welcometopic": {
+		"noRepeats" : "true",
 		"phrases": {
 			"all": [
-				"robots",
-				"butts",
-				"lua",
-				"lunalua",
-				"onTick",
-				"onCameraUpdate",
-				"onTickNPC",
-				"glDraw",
-				"using indoor voices",
-				"me lying about things we talk about in the greeting",
-				"how to properly name a meme channel",
-				"proper code documentation",
-				"the value of my existence",
-				"matters of utmost seriousness",
-				"welcoming people to the codehaus of code where we welcome people to the codehaus of code with our standard greeting that goes 'welcome to the codehaus of code' followed by other stuff",
-				"level design",
-				"world 1-1 in Super Mario Bros",
+				"<phrase welcometopicsmubbex>",
+				"<phrase welcometopicsilly>",
+				"<phrase welcometopicbots>",
+				"<phrase welcometopicscience>",
+				"<phrase welcometopicdev>",
+				"<phrase welcometopicmisc>",
+				"code"
+			]
+		}
+	},
+	"welcometopicsmubbex": {
+		"phrases": {
+			"all": [
+				"SMBX2",
+				"LunaLua",
 				"king bills",
 				"boohemoths",
-				"parallel universes",
-				"blerts and grafs",
-				"defying authority",
+				"blerts",
+				"grafs",
+				"Uncle Broadsword",
+				"world 1-1 in Super Mario Bros"
+			]
+		}
+	},
+	"welcometopicsilly": {
+		"phrases": {
+			"all": [
+				"butts",
+				"anime",
+				"how to properly name a meme channel",
+				"the value of rockythechao's existence",
 				"not trying this at home",
-				"the singularity",
-				"the fourth dimension",
-				"the eventual heat death of the universe",
-				"the impending death of textblox",
-				"dancing on cinematx's grave",
 				"add text here alan",
-				"the ritual 'welcome to the codehaus of code' greeting",
-				"RED PLS",
-				"dank maymays",
 				"fast-paced senpais",
-				"the secret of evolution",
-				"raocow",
-				"letterboxing",
-				"the meaning of life",
 				"the illuminati",
 				"how to identify the color purple",
-				"Kirby",
-				"Uncle Broadsword",
+				"Kirby's new Smash Ultimate forms",
 				"the emoji economy",
 				"the practical applications of grated cheese",
-				"our standardized greeting",
 				"the true codehaus being inside you all along",
-				"video game violins",
+				"the number twelve",
+				"that one time a thing happened",
+				"the secret of evolution",
+				"the meaning of life",
+				"welcoming people to the codehaus of code where we welcome people to the codehaus of code with our standard greeting that goes 'welcome to the codehaus of code' followed by other stuff",
 				"non-sequitur greetings",
-				"Knuckles",
-				"the bot invasion",
-				"hoeloe",
-				"Mario",
+				"how extremely dated some of the randomly-selected items for this welcome message are",
+				"how there are too many bots in this server"
+			]
+		}
+	},
+	"welcometopicbots": {
+		"phrases": {
+			"all": [
+				"Echidnabot",
+				"yours truly",
+				"the chatbot invasion",
+				"how totally awesome roboloe is",
+				"our glorious supreme leader Bastionbot"
+			]
+		}
+	},
+	"welcometopicscience": {
+		"phrases": {
+			"all": [
+				"parallel universes",
+				"the singularity",
+				"the fourth dimension",
+				"the eventual heat death of the universe"
+			]
+		}
+	},
+	"welcometopicdev": {
+		"phrases": {
+			"all": [
+				"code",
+				"code documentation",
+				"code standards",
+				"game development",
+				"game design",
+				"game analysis",
+				"level design",
 				"telegraphing",
+				"letterboxing",
+				"shaders",
+				"the game industry"
+			]
+		}
+	},
+	"welcometopicmisc": {
+		"phrases": {
+			"all": [
+				"Mario",
 				"video games",
 				"dreams",
 				"everything",
-				"SMBX2",
-				"how totally awesome roboloe is",
-				"our glorious supreme leader Bastion",
-				"the number twelve",
 				"stuff",
-				"things",
-				"that one time a thing happened",
-				"how extremely dated some of the randomly-selected items for this welcome message are",
-				"code",
-				"code",
-				"code",
-				"code",
-				"code",
-				"code",
-				"code"
+				"things"
 			]
 		}
 	},
@@ -154,6 +183,112 @@
 				"http://www.cake-magic.com/dalmations_on_chair-novelty_children.jpg",
 				"https://amandascookin.com/wp-content/uploads/2014/11/Magic-Pumpkin-Cake-pin-600x706.jpg",
 				"https://www.jocooks.com/wp-content/uploads/2013/03/magic-cake-2.jpg"
+			]
+		}
+	},
+
+	"botmemories": {
+		"category": "general",
+		"info": "Want a glimpse into the golden age of #beep-boop?",
+		"phrases": {
+			"all": [
+				"https://cdn.discordapp.com/attachments/273281168130965504/322133039247392768/image.png",
+				"https://cdn.discordapp.com/attachments/216229325484064768/322141723583053836/image.png",
+				"https://cdn.discordapp.com/attachments/273281168130965504/322162861067599873/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322177911723393025/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322202129609654273/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322212202503340032/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326520083574816770/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326520488417558530/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326521152442990613/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326521614759886849/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326522398935351296/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322157449790357504/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322158118580518912/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322159623358513163/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322167474403409921/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322173061375721472/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322172663759896577/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322172855645241344/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322172563868352522/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322172175333326848/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322171122785189888/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322172014884421635/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322198404648140800/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322198604490211348/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322548729037062144/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/320739224611454977/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/320751383382851605/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/320775033783844864/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/321076534427385857/image.png",
+				"https://cdn.discordapp.com/attachments/273281418178592779/321067487569379329/image.png",
+				"https://cdn.discordapp.com/attachments/273281418178592779/321078836211089410/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/321116912857645058/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/321478868663795722/image.png",
+				"http://i.imgur.com/2Eu1xvy.png",
+				"http://i.imgur.com/WpmWRdt.png",
+				"http://i.imgur.com/LgwAkAD.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/321807804178628608/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/321808231586463746/image.png",
+				"https://cdn.discordapp.com/attachments/216229325484064768/321840115963920384/image.png",
+				"https://cdn.discordapp.com/attachments/216229325484064768/321844301715996672/image.png",
+				"https://cdn.discordapp.com/attachments/216229325484064768/321843445633253377/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322157340335931394/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/322551916666290176/image.png",
+				"https://cdn.discordapp.com/attachments/216229325484064768/325755421459611648/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326026991335768064/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326064670156914688/Screenshot_2017-06-18-13-16-26-EDITED.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326519806218076163/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326519922463342592/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326525322436542466/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326524123759116288/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326525729582088192/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326528059853373453/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326529268920221696/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326529748941537291/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326529921767833600/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326531518979637248/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326532415776358420/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326533021945823235/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326533191567540225/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326533686390685697/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326533969761927168/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326534646366208000/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326535863389388800/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326536921990037504/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326538456929009674/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326538889672261633/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326538957003423744/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326539188394655744/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326541695653249025/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326540816409427968/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326541334972203008/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326541334972203008/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326542029783957515/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326542276992040960/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326828808592293888/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326829400899190787/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326831658718199811/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326841492188430347/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326867413117435904/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326873364658388996/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/326882225478172683/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/332706997386608641/image.png",
+				"https://cdn.discordapp.com/attachments/216229325484064768/335591023202009099/unknown.png",
+				"https://cdn.discordapp.com/attachments/216229325484064768/337427662945386516/unknown.png",
+				"https://cdn.discordapp.com/attachments/216229325484064768/337430946641084438/unknown.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/338342752054018049/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/338429682753994752/unknown.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/338535392519258112/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/339243469182730240/unknown.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/339244057244991499/unknown.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/340644500210712576/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/340646644657946624/unknown.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/340647538392563713/unknown.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/340932273157308417/image.png",
+				"https://media.discordapp.net/attachments/266261648988307456/340933021903486976/image.png?width=147&height=481",
+				"https://cdn.discordapp.com/attachments/266261648988307456/341762084247175170/image.png",
+				"https://cdn.discordapp.com/attachments/266261648988307456/341762329739788308/image.png"
 			]
 		}
 	},

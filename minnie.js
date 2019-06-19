@@ -29,10 +29,8 @@ let loginId             = mconfig.loginId;
 let modRoleId           = mconfig.modRoleId;
 let startingChannelId   = mconfig.startingChannel;
 let startingGuildId     = mconfig.startingGuild;
-let authorizeData       = mconfig.authIds;
+let authorizeData       = mconfig.authIds || {};
 
-if (authorizeData == null)
-    authorizeData = {};
 
 let emoteReacts = {
     default: ["✊"],
@@ -52,7 +50,13 @@ if(fs.existsSync("servercommands.json"))
 }
 
 //let responses   = JSON.parse(fs.readFileSync("responses.json", "utf8"));
-let keywords = JSON.parse(fs.readFileSync("keywords.json", "utf8"));
+let basekeywords = JSON.parse(fs.readFileSync("keywords.json", "utf8"));
+let keywords = basekeywords;
+if(fs.existsSync("serverkeywords.json"))
+{
+	let serverkeywords = JSON.parse(fs.readFileSync("serverkeywords.json", "utf8"));
+	keywords = {...basekeywords, ...serverkeywords};
+}
 
 if(!fs.existsSync("userdata.json"))
     fs.writeFileSync("userdata.json", "{}", "utf8");
@@ -140,6 +144,19 @@ function getRandomInt(min, max)
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function shuffleArray (array) {
+    let i = 0
+      , j = 0
+      , temp = null
+
+    for (i = array.length - 1; i > 0; i -= 1) {
+        j = Math.floor(Math.random() * (i + 1))
+        temp = array[i]
+        array[i] = array[j]
+        array[j] = temp
+    }
+}
+
 function getArrayRandom(array)
 {
     if (array == null)
@@ -189,10 +206,7 @@ function updateJson(data, name)
 function updateServerData(guild)
 {
     consoleLog("UPDATING SERVER DATA: " + guild.name);
-    if (serverdata[guild.id] == null)
-    {
-        serverdata[guild.id] = {};
-    }
+    serverdata[guild.id] = serverdata[guild.id] || {};
     let guildEntry = serverdata[guild.id];
 
     // Basic data
@@ -204,8 +218,7 @@ function updateServerData(guild)
     for (let j in categories)
     {
         let val = categories[j];
-        if (guildEntry[val] == null)
-            guildEntry[val] = {};
+        guildEntry[val] = guildEntry[val] || {};
     }
 
     // Channel data
@@ -213,8 +226,7 @@ function updateServerData(guild)
     {
         consoleLog("UPDATING SERVER'S CHANNEL DATA: " + channel.id.toString() + "(" + channel.name + ")");
 
-        if (guildEntry.channels[channel.id] == null)
-            guildEntry.channels[channel.id] = {};
+        guildEntry.channels[channel.id] = guildEntry.channels[channel.id] || {};
         let channelEntry = guildEntry.channels[channel.id];
 
         channelEntry.name = channel.name;
@@ -243,10 +255,7 @@ function updateUserData(user)
     }
 
     consoleLog("UPDATING USER DATA");// + user.username);
-    if (userdata[user.id] == null)
-    {
-        userdata[user.id] = {};
-    }
+    userdata[user.id] = userdata[user.id] || {};
     let userEntry = userdata[user.id];
 
     userEntry.username = user.username;
@@ -268,10 +277,9 @@ function updateRegex()
 }
 
 
-function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, userToMention)
+function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, userToMention, mustSend)
 {
-    if (args.sequenceLevel == null)
-        args.sequenceLevel = 0;
+    args.sequenceLevel = args.sequenceLevel || 0;
 
     let firstOfSequence = false;
     let currentMsg = "";
@@ -289,9 +297,13 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
         if (args.sequenceLevel === 0)
             firstOfSequence = true
     }
-    if (currentMsg.includes("<mention>")  &&  args.userToMention != null)
+    if (currentMsg.includes("<mention>"))
     {
-        currentMsg = currentMsg.replace(/<mention>/gi, "@" + userToMention.username + "#" + userToMention.discriminator + " ");
+        currentMsg = currentMsg.replace(/<mention>/gi, (args.userToMention != null) ? "@" + userToMention.username + "#" + userToMention.discriminator + " " : "@NOBODY IN PARTICULAR");
+    }
+    if (currentMsg.includes("<servername>"))
+    {
+        currentMsg = currentMsg.replace(/<servername>/gi, (msg.guild != nil) ? msg.guild.name : "our DMs");
     }
 
     if (args.isCodeBlock === true)
@@ -299,11 +311,9 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
         currentMsg += "\n```";
     }
 
-    if (args.waitRange == null)
-        args.waitRange = 1;
+    args.waitRange = args.waitRange || 1;
 
-    if (args.extraPause == null)
-        args.extraPause = 0;
+    args.extraPause = args.extraPause || 0;
 
     let totalTypingTime = Math.min(args.msg.length, 200) * (Math.random() * args.waitRange) * 15 + args.extraPause;
 
@@ -336,17 +346,20 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 }
 
 
-function keywordPost(channel, keyword, category)
+let phraseSetsShuffled = {}
+function keywordPost(channel, keyword, category, user)
 {
-    let postText = getPhraseRandom(keyword, category);
-    sendMsg({channel: channel, msg: postText})
+    phraseSetsShuffled = {}
+    let postText = getPhraseRandom(keyword, category, (commands[keyword].noRepeats != null));
+    sendMsg({channel: channel, msg: postText, userToMention: user})
 }
 
 
-function getPhraseRandom(keyword, category)
+function getPhraseRandom(keyword, category, shuffle)
 {
-    if (category == null)
-        category = "all";
+    category = category || "all";
+    if (shuffle == null)
+        shuffle = false;
 
     if (commands[keyword] != null)
     {
@@ -358,11 +371,39 @@ function getPhraseRandom(keyword, category)
 
         consoleLog("Getting random phrase: keyword=" + keyword + ", category=" + category);
 
-        let postText = getArrayRandom(commands[keyword].phrases[category]).value;
 
+        // Get the randomized phrase
+        let postText = ""
+
+        // New option for randomization to prevent repeats: shuffle the array, then step through it index by index
+        if (shuffle == true)
+        {
+            let phraseArray = commands[keyword].phrases[category];
+            phraseSetsShuffled[keyword] = phraseSetsShuffled[keyword] || {};
+
+            let selectedIndex = phraseSetsShuffled[keyword][category];
+            if (selectedIndex == null  ||  selectedIndex == phraseArray.length-1)
+            {
+                phraseSetsShuffled[keyword][category] = 0;
+                selectedIndex = 0;
+                shuffleArray(phraseArray);
+            }
+            else
+            {
+                phraseSetsShuffled[keyword][category] += 1;
+            }
+
+            postText = phraseArray[selectedIndex];
+        }
+        // Otherwise select it with getArrayRandom as usual
+        else
+            postText = getArrayRandom(phraseArray).value;
+
+
+        // <phrase> tag substitutions
         let newPostText = postText.replace(/<phrase [^\s]+>/gi, function (x)
         {
-            let replText = getPhraseRandom(x.slice(8, -1));
+            let replText = getPhraseRandom(x.slice(8, -1), null, (commands[keyword].noRepeats != null));
             consoleLog("Replacement made: " + replText);
             return replText
         });
@@ -409,7 +450,7 @@ function buildHelpCategories()
 let cmdFuncts = {};
 cmdFuncts.sendResponse = function (msg, cmdStr, argStr, props)
 {
-    keywordPost(msg.channel, cmdStr, argStr);
+    keywordPost(msg.channel, cmdStr, argStr, msg.member.user);
 };
 
 cmdFuncts.toggleTTS = function (msg, cmdStr, argStr, props)
@@ -502,7 +543,7 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
     client.user.setStatus("invisible")
         .catch(msgSendError);
 
-    let k = getPhraseRandom("shutdown", "all");
+    let k = getPhraseRandom("shutdown");
     if(k)
     {
         msg.channel.send(k.value, {
@@ -523,9 +564,9 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 
 
 
-cmdFuncts.welcomeToCodehaus = function (channel, user)
+cmdFuncts.welcomeMessage = function (channel, user)
 {
-    sendMsg({channel: channel, msg: getPhraseRandom("welcome", "all"), userToMention: user});
+    sendMsg({channel: channel, msg: getPhraseRandom("welcome"), userToMention: user});
 };
 
 
@@ -827,9 +868,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 
         if (newProps != null)
         {
-            let authStr = newProps.auth;
-            if (authStr == null)
-                authStr = "everyone";
+            let authStr = newProps.auth || "everyone";
 
             if (newProps.info != null)
             {
@@ -851,7 +890,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
     {
         newEmbed["fields"] = [{
             name: "Minniebot help",
-            value: "To perform a command, prefix it with `/minnie ` (for example, `/minnie quote`)\n\nTo get info on a command, prefix it with `/minnie help ` (type just `/minnie help` to display this post.)\n\nCrossed-out commands are currently broken."
+            value: "To perform a command, prefix it with `/minnie ` (for example, `/minnie quote`)\n\nTo get info on a command, prefix it with `/minnie help ` (type just `/minnie help` to display this post.)\n\nCrossed-out commands are either broken or not implemented yet."
         }];
 
         for (let item in helpCategories)
@@ -863,9 +902,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
                     listStr = listStr + ", ";
 
                 let cmdStr = helpCategories[item][item2];
-                let functName = commands[cmdStr]["function"];
-                if (functName == null)
-                    functName = "sendResponse";
+                let functName = commands[cmdStr]["function"] || "sendResponse";
 
                 if (cmdFuncts[functName] == null)
                     listStr = listStr + "~~`" + cmdStr + "`~~";
@@ -1034,9 +1071,7 @@ client.on("message", msg =>
                     {
                         consoleLog("AUTHORIZATION NEEDED: " + authLevel);
                         matchesAuthLevel = false;
-                        let authTable = authorizeData[authLevel];
-                        if (authTable == null)
-                            authTable = ownerIds;
+                        let authTable = authorizeData[authLevel] || ownerIds;
 
                         if (authTable.indexOf(msg.author.id) !== -1)
                             matchesAuthLevel = true
@@ -1258,13 +1293,11 @@ client.on("guildMemberAdd", member => {
 
 	try
 	{
-		let tempQuiet = quietMode;
-		let tempSeq = midSequence;
-		cmdFuncts.welcomeToCodehaus (channelGen, member.user);
+		cmdFuncts.welcomeMessage (channelGen, member.user);
 	}
 	catch(err)
 	{
-		//channelGen.sendMessage("Oh, I tried to welcome a new member but something went wrong!");
+		channelGen.sendMessage("Oh, I tried to welcome a new member but something went wrong!");
 		consoleLog(err);
 	}
 });

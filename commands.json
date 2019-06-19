@@ -3,16 +3,24 @@
 		"category": "this is used to sort the commands in the help post;  if not specified, the command will not be listed",
 		"function": "the name of the function to call;  defaults to sendResponse if not specified.  All functions pass in the message, command and additional text as arguments.",
 		"needsArgs": "if this field is defined at all, the command will fail if arguments aren't specified",
+		"noRepeats": "if this field is defined at all, phrases will be randomly selected via shuffling the category's array and iterating through it to prevent repeats in multiple <phrase> calls.",
 		"info": "the text displayed when someone inputs /knux help [this command];  if this isn't specified, the bot will deny its existence",
 		"auth": "if this field is defined at all, only owner, server mods, and whitelisted users can use the command;  specify a group name defined in config.json's authIds to whitelist those members",
 		"cooldown": "cooldown before a given command can be reused by the same person",
-		"regex": "if this attribute is defined, the command can be initiated whenever a match is detected in other users' posts (generally don't use this with Minnie, okay?)",
+		"regex": "if this field is defined, the command can be initiated whenever a match is detected in other users' posts (generally don't use this with Minnie, okay?)",
 		"phrases": {
 			"all": [
 				"a table of possible responses",
 				"sendResponse will just choose one of these randomly and post it",
 				"other functions can make use of these as well.",
 				"all is the default category, other category names can be defined."
+			],
+			"tags": [
+				"Responses can include the following tags:",
+				"All instances of the <mention> tag in a response will be replaced with a mention of a user;  the user depends on the command's function.",
+				"All instances of the <servername> tag in a response will be replaced with the server's name.",
+				"All instances of the <phrase commandname> in a response will be replaced with a randomly-selected phrase from that command.",
+				"The <page> tag breaks up a response into multiple posts."
 			]
 		}
 	},
