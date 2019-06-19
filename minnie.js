@@ -230,24 +230,30 @@ function updateServerData(guild)
     // Channel data
     guild.channels.forEach(channel =>
     {
-        consoleLog("UPDATING SERVER'S CHANNEL DATA: " + channel.id.toString() + "(" + channel.name + ")");
-
-        if (guildEntry.channels[channel.id] == null)
-            guildEntry.channels[channel.id] = {};
-        let channelEntry = guildEntry.channels[channel.id];
-
-        channelEntry.name = channel.name;
-        channelEntry.type = channel.type;
-
-        /*
-        switch (channel.type)
+        if (channel != null)
         {
-            case "text":
-                break;
-            case "voice":
-                break;
+            consoleLog("UPDATING SERVER'S CHANNEL DATA: " + channel.id.toString() + "(" + channel.name + ")");
+
+            if (guildEntry.channels[channel.id] == null)
+                guildEntry.channels[channel.id] = {};
+            let channelEntry = guildEntry.channels[channel.id];
+
+            channelEntry.name = channel.name;
+            channelEntry.type = channel.type;
+
+            /*
+            switch (channel.type)
+            {
+                case "text":
+                    break;
+                case "voice":
+                    break;
         }
-        */
+            */
+
+        }
+        else
+            consoleLog("UNABLE TO PROCESS CHANNEL");
     });
     consoleLog("DONE UPDATING SERVER'S CHANNEL DATA");
 
