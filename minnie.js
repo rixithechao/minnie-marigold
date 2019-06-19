@@ -797,7 +797,7 @@ cmdFuncts.postLogs = function (msg, cmdStr, argStr, props)
         }
 
         sendMsg({
-            channel: msg.channel,
+            channel: msg.member.user,
             msg: comboString,
             isCodeBlock: true
         });
