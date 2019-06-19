@@ -384,20 +384,16 @@ function getPhraseRandom(keyword, category, shuffle)
     if (shuffle == null)
         shuffle = false;
 
-    if (commands[keyword] != null)
+    if (commands[keyword] != null  &&  commands[keyword].phrases != null  &&  (commands[keyword].phrases[category] != null  ||  commands[keyword].phrases.all != null))
     {
-        if (commands[keyword].phrases == null)
-            category = "occasional";
-
-        if (commands[keyword].phrases[category] == null)
-            category = "all";
+        let phraseArray = commands[keyword].phrases[category];
+        if  (phraseArray == null)
+            phraseArray = commands[keyword].phrases.all;
 
         consoleLog("Getting random phrase: keyword=" + keyword + ", category=" + category);
 
-
         // Get the randomized phrase
         let postText = ""
-        let phraseArray = commands[keyword].phrases[category];
 
         // New option for randomization to prevent repeats: shuffle the array, then step through it index by index
         if (shuffle == true)
@@ -435,7 +431,10 @@ function getPhraseRandom(keyword, category, shuffle)
         return newPostText
     }
     else
-        return "UNABLE TO GET POST FOR KEYWORD: " + keyword + ", CATEGORY: " + category
+    {
+        consoleLog("UNABLE TO GET POST FOR KEYWORD: " + keyword + ", CATEGORY: " + category);
+        return "UNABLE TO GET POST"
+    }
 }
 
 
