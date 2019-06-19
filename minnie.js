@@ -226,7 +226,8 @@ function updateServerData(guild)
     {
         consoleLog("UPDATING SERVER'S CHANNEL DATA: " + channel.id.toString() + "(" + channel.name + ")");
 
-        guildEntry.channels[channel.id] = guildEntry.channels[channel.id] || {};
+        if (guildEntry.channels[channel.id] == null)
+            guildEntry.channels[channel.id] = {};
         let channelEntry = guildEntry.channels[channel.id];
 
         channelEntry.name = channel.name;
