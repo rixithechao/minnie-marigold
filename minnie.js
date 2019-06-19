@@ -230,7 +230,7 @@ function updateServerData(guild)
     // Channel data
     guild.channels.forEach(channel =>
     {
-        if (channel != null || channel.type != "text")
+        if (channel != null && channel.type == "text")
         {
             consoleLog("UPDATING SERVER'S CHANNEL DATA: " + channel.id.toString() + "(" + channel.name + ")");
 
