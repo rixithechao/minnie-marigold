@@ -295,7 +295,7 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
         nextMsg = args.msg.substring(args.msg.indexOf('<page>') + 6);
         midSequence = true;
         if (args.sequenceLevel === 0)
-            firstOfSequence = true
+            firstOfSequence = true;
     }
     if (currentMsg.includes("<mention>"))
     {
@@ -1297,7 +1297,7 @@ client.on("guildMemberAdd", member => {
 	}
 	catch(err)
 	{
-		channelGen.sendMessage("Oh, I tried to welcome a new member but something went wrong!");
+		//channelGen.sendMessage("Oh, I tried to welcome a new member but something went wrong!");
 		consoleLog(err);
 	}
 });
