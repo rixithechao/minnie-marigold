@@ -372,7 +372,7 @@ let phraseSetsShuffled = {}
 function keywordPost(channel, keyword, category, user)
 {
     phraseSetsShuffled = {}
-    let postText = getPhraseRandom(keyword, category, (commands[keyword].noRepeats != null));
+    let postText = getPhraseRandom(keyword, category, ((commands[keyword].noRepeats) == true));
     sendMsg({channel: channel, msg: postText, userToMention: user})
 }
 
@@ -423,8 +423,9 @@ function getPhraseRandom(keyword, category, shuffle)
         // <phrase> tag substitutions
         let newPostText = postText.replace(/<phrase [^\s]+>/gi, function (x)
         {
-            let replText = getPhraseRandom(x.slice(8, -1), null, (commands[keyword].noRepeats != null));
-            try {consoleLog("Replacement made: " + replText)} catch (err) {consoleLog("replText is "+replText.toString())};
+            let slice = x.slice(8, -1);
+            let replText = getPhraseRandom(slice, null, ((commands[keyword].noRepeats) == true));
+            try {consoleLog("Slice = " + slice + ", Replacement made: " + replText)} catch (err) {consoleLog("either replText or slice is null or undefined: " + err)};
             return replText
         });
 
