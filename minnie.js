@@ -551,18 +551,39 @@ function clearReactionsInMessage(msg, id)
 
 
 /*
-function initializePoll (channel)
+
+function getPoll (id)
 {
-	if (guildEntry[val])
+	let guildEntry = serverdata[msg.guild.id];
+	if (!guildEntry.polls[id])
+		guildEntry.polls[id] = {};
+
+	return guildEntry.polls[id];
 }
 
+function updatePoll (args) //id, channel, post, deadline, options
+{
+	let pollObj = getPoll(args.id);
+	let items = ["channel", "post", "deadline", "options"];
+	for (let j in items)
+	{
+		if (j != null)
+			pollObj = j;
+	}
+}
 
-
-cmdFuncts.startPoll = function (msg, cmdStr, argStr, props)
+function startPoll(id)
 {
 	
 }
+
+
+cmdFuncts.testPoll = function (msg, cmdStr, argStr, props)
+{
+	updatePoll {id: "test", deadline:}
+}
 */
+
 
 
 
@@ -612,12 +633,6 @@ cmdFuncts.getJson = function (msg, cmdStr, argStr, props)
 }
 
 
-
-
-cmdFuncts.welcomeMessage = function (channel, user)
-{
-    sendMsg({channel: channel, msg: getPhraseRandom("welcome"), userToMention: user});
-};
 
 
 
@@ -1347,20 +1362,20 @@ client.on("message", msg =>
 
 
 /**********************************************
-*  ON WELCOME                                 *
+*  WELCOME                                    *
 **********************************************/
 client.on("guildMemberAdd", member => {
 	let channelGen = member.guild.defaultChannel;
-	let channelBoop = client.channels.find('name', 'beep-boop');
+	//let channelBoop = client.channels.find('name', 'beep-boop');
 
 	try
 	{
-		cmdFuncts.welcomeMessage (channelGen, member.user);
+		keywordPost(channelGen, "welcome", null, member.user);
 	}
 	catch(err)
 	{
 		//channelGen.sendMessage("Oh, I tried to welcome a new member but something went wrong!");
-		consoleLog(err);
+		consoleLog("I tried to welcome a new member but something went wrong! "+err);
 	}
 });
 

@@ -720,6 +720,13 @@
 
 
 
+	"testpoll": {
+		"category": "poll",
+		"auth": "owner",
+		"info": "Starts a test reaction poll in the current channel.",
+		"function": "testPoll"
+	},
+
 	"startpoll": {
 		"category": "poll",
 		"auth": "owner",
