@@ -323,7 +323,7 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
     }
     if (currentMsg.includes("<servername>"))
     {
-        currentMsg = currentMsg.replace(/<servername>/gi, (msg.guild != nil) ? msg.guild.name : "our DMs");
+        currentMsg = currentMsg.replace(/<servername>/gi, (args.channel != null  &&  args.channel.guild != nil) ? args.channel.guild.name : "UNKNOWN GUILD");
     }
 
     if (args.isCodeBlock === true)
