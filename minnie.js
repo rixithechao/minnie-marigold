@@ -52,11 +52,13 @@ if(fs.existsSync("servercommands.json"))
 //let responses   = JSON.parse(fs.readFileSync("responses.json", "utf8"));
 let basekeywords = JSON.parse(fs.readFileSync("keywords.json", "utf8"));
 let keywords = basekeywords;
+/*
 if(fs.existsSync("serverkeywords.json"))
 {
 	let serverkeywords = JSON.parse(fs.readFileSync("serverkeywords.json", "utf8"));
 	keywords = {...basekeywords, ...serverkeywords};
 }
+*/
 
 if(!fs.existsSync("userdata.json"))
     fs.writeFileSync("userdata.json", "{}", "utf8");
@@ -145,15 +147,13 @@ function getRandomInt(min, max)
 }
 
 function shuffleArray (array) {
-    let i = 0
-      , j = 0
-      , temp = null
+    let i = 0, j = 0, temp = null;
 
     for (i = array.length - 1; i > 0; i -= 1) {
-        j = Math.floor(Math.random() * (i + 1))
-        temp = array[i]
-        array[i] = array[j]
-        array[j] = temp
+        j = Math.floor(Math.random() * (i + 1));
+        temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
     }
 }
 
@@ -173,7 +173,7 @@ function reactFromArray(message, array)
 {
     if (array == null)
     {
-        array = emoteReacts.default
+        array = emoteReacts.default;
         //consoleLog("No valid array provided, attempting to use default emote array")
     }
     //consoleLog("Array values: "+array.toString())
@@ -193,7 +193,7 @@ function reactFromArray(message, array)
 
     }
     else
-        consoleLog("Couldn't get a valid emoji string")
+        consoleLog("Couldn't get a valid emoji string");
 }
 
 function updateJson(data, name)
