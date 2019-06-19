@@ -424,10 +424,11 @@ function getPhraseRandom(keyword, category, shuffle)
         let newPostText = postText.replace(/<phrase [^\s]+>/gi, function (x)
         {
             let replText = getPhraseRandom(x.slice(8, -1), null, (commands[keyword].noRepeats != null));
-            consoleLog("Replacement made: " + replText);
+            try {consoleLog("Replacement made: " + replText)} catch (err) {consoleLog("replText is "+replText.toString())};
             return replText
         });
 
+        try {consoleLog("Final post text: " + newPostText)} catch (err) {consoleLog("Could not compile final post text: " + err)};
         return newPostText
     }
     else
