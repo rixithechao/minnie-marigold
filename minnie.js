@@ -1370,7 +1370,7 @@ client.on("guildMemberAdd", member => {
 
 	try
 	{
-		keywordPost(channelGen, "welcome", null, member.user);
+		keywordPost(channelGen, "welcome", "all", member.user);
 	}
 	catch(err)
 	{
