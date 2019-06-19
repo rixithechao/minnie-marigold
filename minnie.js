@@ -113,7 +113,7 @@ function setChannelAllowed(channel, isAllowed)
 {
     let chId = channel.id.toString();
     channelsAllowed[chId] = isAllowed;
-    serverdata.channelsAllowed = channelsAllowed;
+    serverdata[channel.guild.id].channelsAllowed = channelsAllowed;
 }
 
 function getChannelByName(guild, channelName)
@@ -608,6 +608,7 @@ cmdFuncts.getJson = function (msg, cmdStr, argStr, props)
 {
 	msg.member.user.send("Attempting to send the data...");
 	msg.member.user.send(new Discord.Attachment('./serverdata.json', 'serverdata.json')).catch(msgSendError);
+	msg.member.user.send(new Discord.Attachment('./userdata.json', 'userdata.json')).catch(msgSendError);
 }
 
 
