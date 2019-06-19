@@ -295,6 +295,9 @@ function updateRegex()
 
 function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, userToMention, mustSend)
 {
+    if (args.msg == null)
+        args.msg = "If you're seeing this message it means rocky screwed something up again!";
+
     if (args.sequenceLevel == null)
         args.sequenceLevel = 0;
 
@@ -428,6 +431,8 @@ function getPhraseRandom(keyword, category, shuffle)
             consoleLog("Replacement made: " + replText);
             return replText
         });
+
+        consoleLog("Phrase chosen: " + newPostText);
 
         return newPostText
     }
