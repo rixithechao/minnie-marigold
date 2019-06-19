@@ -606,7 +606,7 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 
 cmdFuncts.getJson = function (msg, cmdStr, argStr, props)
 {
-	message.member.user.send("Testing...");//Here you go!", { files: ["./serverdata.png","./userdata.png"] });
+	msg.member.user.send("Testing...");//Here you go!", { files: ["./serverdata.png","./userdata.png"] });
 }
 
 
