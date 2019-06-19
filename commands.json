@@ -689,6 +689,13 @@
 		"function": "getRegex"
 	},
 
+	"data": {
+		"categoory": "mod-only",
+		"auth": "owner",
+		"info": "Send the JSON data for debugging",
+		"function": "getJson"
+	},
+
 
 	"channel": {
 		"category": "mod-only",

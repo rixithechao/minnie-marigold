@@ -547,6 +547,26 @@ function clearReactionsInMessage(msg, id)
 }
 
 
+
+
+
+/*
+function initializePoll (channel)
+{
+	if (guildEntry[val])
+}
+
+
+
+cmdFuncts.startPoll = function (msg, cmdStr, argStr, props)
+{
+	
+}
+*/
+
+
+
+
 cmdFuncts.quote = function (msg, cmdStr, argStr, props)
 {
     msg.channel.fetchMessage(argStr)
@@ -582,6 +602,13 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
         }, 2000);
     }, 3000);
 };
+
+
+cmdFuncts.getJson = function (msg, cmdStr, argStr, props)
+{
+	message.member.user.send("Testing...");//Here you go!", { files: ["./serverdata.png","./userdata.png"] });
+}
+
 
 
 
@@ -1042,7 +1069,12 @@ client.on("message", msg =>
             // Log the message
             consoleLog("------------------------");
             if (!msg.member)
-                consoleLog(msg.member.displayName + " said: " + msg.cleanContent);
+                {
+                    if (msg.member.displayName != null)
+                        consoleLog(msg.member.displayName + " said: " + msg.cleanContent);
+                    else
+                        consoleLog(msg.member.user.username + " said: " + msg.cleanContent);
+                }
             else
                 consoleLog("[unknown] said: " + msg.cleanContent);
 
