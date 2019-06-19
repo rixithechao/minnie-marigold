@@ -29,7 +29,10 @@ let loginId             = mconfig.loginId;
 let modRoleId           = mconfig.modRoleId;
 let startingChannelId   = mconfig.startingChannel;
 let startingGuildId     = mconfig.startingGuild;
-let authorizeData       = mconfig.authIds || {};
+let authorizeData       = mconfig.authIds;
+
+if (authorizeData == null)
+    authorizeData = {};
 
 
 let emoteReacts = {
@@ -206,7 +209,9 @@ function updateJson(data, name)
 function updateServerData(guild)
 {
     consoleLog("UPDATING SERVER DATA: " + guild.name);
-    serverdata[guild.id] = serverdata[guild.id] || {};
+    if (serverdata[guild.id] == null)
+        serverdata[guild.id] = {};
+
     let guildEntry = serverdata[guild.id];
 
     // Basic data
@@ -218,7 +223,8 @@ function updateServerData(guild)
     for (let j in categories)
     {
         let val = categories[j];
-        guildEntry[val] = guildEntry[val] || {};
+        if (guildEntry[val] == null)
+            guildEntry[val] = {};
     }
 
     // Channel data
@@ -257,7 +263,9 @@ function updateUserData(user)
     }
 
     consoleLog("UPDATING USER DATA");// + user.username);
-    userdata[user.id] = userdata[user.id] || {};
+    if (userdata[user.id] == null)
+        userdata[user.id] = {};
+
     let userEntry = userdata[user.id];
 
     userEntry.username = user.username;
@@ -281,7 +289,8 @@ function updateRegex()
 
 function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, userToMention, mustSend)
 {
-    args.sequenceLevel = args.sequenceLevel || 0;
+    if (args.sequenceLevel == null)
+        args.sequenceLevel = 0;
 
     let firstOfSequence = false;
     let currentMsg = "";
@@ -313,9 +322,11 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
         currentMsg += "\n```";
     }
 
-    args.waitRange = args.waitRange || 1;
+    if (args.waitRange == null)
+        args.waitRange = 1;
 
-    args.extraPause = args.extraPause || 0;
+    if (args.extraPause == null)
+        args.extraPause = 0;
 
     let totalTypingTime = Math.min(args.msg.length, 200) * (Math.random() * args.waitRange) * 15 + args.extraPause;
 
@@ -382,7 +393,8 @@ function getPhraseRandom(keyword, category, shuffle)
         if (shuffle == true)
         {
             let phraseArray = commands[keyword].phrases[category];
-            phraseSetsShuffled[keyword] = phraseSetsShuffled[keyword] || {};
+            if (phraseSetsShuffled[keyword] = null)
+                phraseSetsShuffled[keyword] = {};
 
             let selectedIndex = phraseSetsShuffled[keyword][category];
             if (selectedIndex == null  ||  selectedIndex == phraseArray.length-1)
@@ -871,7 +883,10 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 
         if (newProps != null)
         {
-            let authStr = newProps.auth || "everyone";
+            
+            let authStr = newProps.auth;
+            if (authStr == null)
+                authStr = "everyone";
 
             if (newProps.info != null)
             {
@@ -905,7 +920,9 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
                     listStr = listStr + ", ";
 
                 let cmdStr = helpCategories[item][item2];
-                let functName = commands[cmdStr]["function"] || "sendResponse";
+                let functName = commands[cmdStr]["function"];
+                if (functName == null)
+                    functName = "sendResponse";
 
                 if (cmdFuncts[functName] == null)
                     listStr = listStr + "~~`" + cmdStr + "`~~";
@@ -1074,7 +1091,9 @@ client.on("message", msg =>
                     {
                         consoleLog("AUTHORIZATION NEEDED: " + authLevel);
                         matchesAuthLevel = false;
-                        let authTable = authorizeData[authLevel] || ownerIds;
+                        let authTable = authorizeData[authLevel];
+                        if (authTable == null)
+                            authTable = ownerIds;
 
                         if (authTable.indexOf(msg.author.id) !== -1)
                             matchesAuthLevel = true
