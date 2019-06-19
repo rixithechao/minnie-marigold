@@ -48,7 +48,11 @@
 		"category": "general",
 		"phrases": {
 			"all": [
-				"Hi, <mention>! Welcome to <servername>!"
+				"Hi, <mention>!  Welcome to <servername>!",
+				"What's this?  <mention> has joined <servername>!",
+				"<mention>?  In _my_ <servername>?  It's more likely than you think!",
+				"NEW CHALLENGER: <mention> has entered <servername>!",
+				"BEHOLD, <servername>, I HAVE BROUGHT <mention> TO THESE LANDS!"
 			]
 		}
 	},
