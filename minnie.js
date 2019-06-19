@@ -394,11 +394,11 @@ function getPhraseRandom(keyword, category, shuffle)
 
         // Get the randomized phrase
         let postText = ""
+        let phraseArray = commands[keyword].phrases[category];
 
         // New option for randomization to prevent repeats: shuffle the array, then step through it index by index
         if (shuffle == true)
         {
-            let phraseArray = commands[keyword].phrases[category];
             if (phraseSetsShuffled[keyword] = null)
                 phraseSetsShuffled[keyword] = {};
 
