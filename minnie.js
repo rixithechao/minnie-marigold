@@ -432,8 +432,6 @@ function getPhraseRandom(keyword, category, shuffle)
             return replText
         });
 
-        consoleLog("Phrase chosen: " + newPostText);
-
         return newPostText
     }
     else
