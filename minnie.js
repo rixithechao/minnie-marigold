@@ -243,6 +243,7 @@ function updateServerData(guild)
         }
         */
     });
+    consoleLog("DONE UPDATING SERVER'S CHANNEL DATA");
 
     updateJson(serverdata, 'serverdata');
 }
@@ -358,7 +359,8 @@ function keywordPost(channel, keyword, category, user)
 
 function getPhraseRandom(keyword, category, shuffle)
 {
-    category = category || "all";
+    if (category == null)
+        category = "all";
     if (shuffle == null)
         shuffle = false;
 
