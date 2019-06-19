@@ -295,7 +295,7 @@ function updateRegex()
 
 function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, userToMention, mustSend)
 {
-    if (args.msg == null)
+    if (args.msg == null  ||  args.msg == undefined)
         args.msg = "If you're seeing this message it means rocky screwed something up again!";
 
     if (args.sequenceLevel == null)
