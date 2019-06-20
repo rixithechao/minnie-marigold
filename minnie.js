@@ -48,8 +48,8 @@ delete basecommands._example;
 let commands = basecommands;
 if(fs.existsSync("servercommands.json"))
 {
-	let servercommands = JSON.parse(fs.readFileSync("servercommands.json", "utf8"));
-	commands = {...basecommands, ...servercommands};
+    let servercommands = JSON.parse(fs.readFileSync("servercommands.json", "utf8"));
+    commands = {...basecommands, ...servercommands};
 }
 
 //let responses   = JSON.parse(fs.readFileSync("responses.json", "utf8"));
@@ -58,8 +58,8 @@ let keywords = basekeywords;
 /*
 if(fs.existsSync("serverkeywords.json"))
 {
-	let serverkeywords = JSON.parse(fs.readFileSync("serverkeywords.json", "utf8"));
-	keywords = {...basekeywords, ...serverkeywords};
+    let serverkeywords = JSON.parse(fs.readFileSync("serverkeywords.json", "utf8"));
+    keywords = {...basekeywords, ...serverkeywords};
 }
 */
 
@@ -80,6 +80,9 @@ let channelsAllowed = {[mconfig.startingChannel] : true};
 let deleteAll = false;
 
 let ttsActive = false;
+
+let activeSequences = {};
+let messageQueues = {};
 
 let sayUser = new Array(0);
 let sayMember = new Array(0);
@@ -295,99 +298,143 @@ function updateRegex()
 
 function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, userToMention, mustSend, isCodeBlock)
 {
-    if (args.msg == null  ||  args.msg == undefined)
-        args.msg = "If you're seeing this message it means rocky screwed something up again!";
+	// Only bother with all of this stuff if a valid channel reference is supplied
+	if (args.channel != null)
+	{
+		// Let's just initialize the message queue for this channel here
+		if (messageQueues[args.channel] == null)
+			messageQueues[args.channel] = new Array(0);
+		let queue = messageQueues[args.channel];
 
-    if (args.sequenceLevel == null)
-        args.sequenceLevel = 0;
+		// Only post if there is no active sequence in this channel or this is part of the active sequence
+		if (!activeSequences[args.channel]  ||  args.sequenceLevel > 0)
+		{
+			if (args.msg == null  ||  args.msg == undefined)
+				args.msg = "If you're seeing this message it means rocky screwed something up again!";
 
-    let firstOfSequence = false;
-    let currentMsg = "";
+			if (args.sequenceLevel == null)
+				args.sequenceLevel = 0;
 
-    if  (args.isCodeBlock === true)
-        currentMsg = "```\n";
-    currentMsg += args.msg;
+			let currentMsg = "";
 
-    // Break at the page tag, but only if not posting code blocks
-    let nextMsg = "";
-    if (currentMsg.includes("<page>") && args.isCodeBlock != true)
-    {
-        currentMsg = args.msg.substring(0, args.msg.indexOf('<page>'));
-        nextMsg = args.msg.substring(args.msg.indexOf('<page>') + 6);
-        midSequence = true;
-        if (args.sequenceLevel === 0)
-            firstOfSequence = true;
-    }
-
-    // Apply non-phrase replacements
-    if (currentMsg.includes("<mention>"))
-    {
-        currentMsg = currentMsg.replace(/<mention>/gi, (args.userToMention != null) ? /*"@" + args.userToMention.username + "#" + args.userToMention.discriminator*/ args.userToMention.toString() + " " : "@NOBODY-IN-PARTICULAR");
-    }
-    if (currentMsg.includes("<servername>"))
-    {
-        currentMsg = currentMsg.replace(/<servername>/gi, (args.channel != null  &&  args.channel.guild != null) ? args.channel.guild.name : "UNKNOWN GUILD");
-    }
-
-    // If the entire post is a code block, split it where necessary and end the block
-    if (args.isCodeBlock === true)
-    {
-        if (currentMsg.length > 1990)
-        {
-            let lastBreak = args.msg.substring(0, 1990).lastIndexOf('\n');
-            if (lastBreak > 0)
-            {
-                nextMsg = args.msg.substring(lastBreak+1);
-                currentMsg = args.msg.substring(0, lastBreak);
-            }
-            else
-            {
-                nextMsg = args.msg.substring(0, 1990);
-                currentMsg = args.msg.substring(1990);
-            }
-        }
-        currentMsg += "\n```";
-    }
-
-    // Determing the time to spend typing
-    if (args.waitRange == null)
-        args.waitRange = 1;
-
-    if (args.extraPause == null)
-        args.extraPause = 0;
-
-    let totalTypingTime = Math.min(args.msg.length, 200) * (Math.random() * args.waitRange) * 15 + args.extraPause;
+			if  (args.isCodeBlock === true)
+				currentMsg = "```\n";
+			currentMsg += args.msg;
 
 
-    // Make the post(s)
-    args.channel.startTyping(args.sequenceLevel);
-    setTimeout(function ()
-    {
-        setTimeout(function ()
-        {
-            args.midSequence = false;
-            if (/*!quietMode  &&  */(!args.midSequence || args.sequenceLevel > 0 || firstOfSequence))
-            {
-                consoleLog("SENDING MESSAGE: " + currentMsg);
-                args.channel.stopTyping();
-                args.channel.send(currentMsg, {split: true /*tts:(ttsActive==true)*/}).catch(msgSendError);
-                if (nextMsg !== "")
-                {
-                    sendMsg({
-                        channel: args.channel,
-                        msg: nextMsg,
-                        waitRange: 0.5,
-                        extraPause: 500,
-                        sequenceLevel: args.sequenceLevel + 1,
-                        isCodeBlock: args.isCodeBlock
-                    });
-                    midSequence = true
-                }
-            }
-        }, 300)
-    }, totalTypingTime);
+			// If there's a page tag, split the message at it and reserve the channel for this sequence
+			let nextMsg = "";
+			if (currentMsg.includes("<page>"))
+			{
+				currentMsg = args.msg.substring(0, args.msg.indexOf('<page>'));
+				nextMsg = args.msg.substring(args.msg.indexOf('<page>') + 6);
+				if (args.sequenceLevel === 0)
+				{
+					activeSequences[args.channel] = true;
+				}
+			}
 
-    return totalTypingTime + 300
+			// Apply non-phrase replacements
+			if (currentMsg.includes("<mention>"))
+			{
+				currentMsg = currentMsg.replace(/<mention>/gi, (args.userToMention != null) ? /*"@" + args.userToMention.username + "#" + args.userToMention.discriminator*/ args.userToMention.toString() + " " : "@NOBODY-IN-PARTICULAR");
+			}
+			if (currentMsg.includes("<servername>"))
+			{
+				currentMsg = currentMsg.replace(/<servername>/gi, (args.channel != null  &&  args.channel.guild != null) ? args.channel.guild.name : "UNKNOWN GUILD");
+			}
+
+			// If the entire post is a code block, split it where necessary and end the block
+			if (args.isCodeBlock === true)
+			{
+				if (currentMsg.length > 1990)
+				{
+					let tempNext = nextMsg
+					let earlierSplitStr = ""
+					let lastBreakPos = args.msg.substring(0, 1990).lastIndexOf('\n');
+					if (lastBreakPos > 0)
+					{
+						earlierSplitStr = args.msg.substring(lastBreakPos+1);
+						currentMsg = args.msg.substring(0, lastBreakPos);
+					}
+					else
+					{
+						earlierSplitStr = args.msg.substring(0, 1990);
+						currentMsg = args.msg.substring(1990);
+					}
+					nextMsg = earlierSplitStr + tempNext
+				}
+				currentMsg += "\n```";
+			}
+
+			// Determing the time to spend typing
+			if (args.waitRange == null)
+				args.waitRange = 1;
+
+			if (args.extraPause == null)
+				args.extraPause = 0;
+
+			let totalTypingTime = Math.min(args.msg.length, 200) * (Math.random() * args.waitRange) * 15 + args.extraPause;
+
+
+			// Make the post(s)
+			//args.channel.startTyping(args.sequenceLevel);
+			setTimeout(function ()
+			{
+				setTimeout(function ()
+				{
+					consoleLog("SENDING MESSAGE: " + currentMsg);
+					//args.channel.stopTyping();
+					args.channel.send(currentMsg, {split: true /*tts:(ttsActive==true)*/}).catch(msgSendError);
+
+					// If the post was split, continue the sequence
+					if (nextMsg !== "")
+					{
+						sendMsg({
+							channel: args.channel,
+							msg: nextMsg,
+							waitRange: 0.5,
+							extraPause: 500,
+							sequenceLevel: args.sequenceLevel + 1,
+							isCodeBlock: args.isCodeBlock
+						});
+					}
+
+					// Otherwise, free the channel...
+					else
+					{
+						activeSequences[args.channel] = false;
+
+						// ...and begin posting any queued messages
+						if (queue.length > 0)
+						{
+							let nextArgs = queue.shift();
+							sendMsg(nextArgs);
+						}
+					}
+
+				}, 300)
+			}, totalTypingTime);
+
+			return totalTypingTime + 300
+		}
+
+		// If currently mid-sequence, queue the message
+		else
+		{
+			queue.push(args);
+			consoleLog("sendMsg was called for a channel I'm currently posting a sequence in, so the call's been queued.");
+
+			return -1;
+		}
+	}
+
+	// The channel wasn't provided
+	else
+	{
+		consoleLog("Oh dear, sendMsg was called without specifying a valid channel!");
+		return -1
+	}
 }
 
 
@@ -581,33 +628,33 @@ function clearReactionsInMessage(msg, id)
 
 function getPoll (id)
 {
-	let guildEntry = serverdata[msg.guild.id];
-	if (!guildEntry.polls[id])
-		guildEntry.polls[id] = {};
+    let guildEntry = serverdata[msg.guild.id];
+    if (!guildEntry.polls[id])
+        guildEntry.polls[id] = {};
 
-	return guildEntry.polls[id];
+    return guildEntry.polls[id];
 }
 
 function updatePoll (args) //id, channel, post, deadline, options
 {
-	let pollObj = getPoll(args.id);
-	let items = ["channel", "post", "deadline", "options"];
-	for (let j in items)
-	{
-		if (j != null)
-			pollObj = j;
-	}
+    let pollObj = getPoll(args.id);
+    let items = ["channel", "post", "deadline", "options"];
+    for (let j in items)
+    {
+        if (j != null)
+            pollObj = j;
+    }
 }
 
 function startPoll(id)
 {
-	
+    
 }
 
 
 cmdFuncts.testPoll = function (msg, cmdStr, argStr, props)
 {
-	updatePoll {id: "test", deadline:}
+    updatePoll {id: "test", deadline:}
 }
 */
 
@@ -654,9 +701,9 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 
 cmdFuncts.getJson = function (msg, cmdStr, argStr, props)
 {
-	msg.member.user.send("Attempting to send the data...");
-	msg.member.user.send(new Discord.Attachment('./serverdata.json', 'serverdata.json')).catch(msgSendError);
-	msg.member.user.send(new Discord.Attachment('./userdata.json', 'userdata.json')).catch(msgSendError);
+    msg.member.user.send("Attempting to send the data...");
+    msg.member.user.send(new Discord.Attachment('./serverdata.json', 'serverdata.json')).catch(msgSendError);
+    msg.member.user.send(new Discord.Attachment('./userdata.json', 'userdata.json')).catch(msgSendError);
 }
 
 
@@ -1392,19 +1439,19 @@ client.on("message", msg =>
 *  WELCOME                                    *
 **********************************************/
 client.on("guildMemberAdd", member => {
-	let channelGen = member.guild.defaultChannel;
-	//let channelBoop = client.channels.find('name', 'beep-boop');
+    let channelGen = member.guild.defaultChannel;
+    //let channelBoop = client.channels.find('name', 'beep-boop');
 
-	try
-	{
-		consoleLog("Attempting to welcome new member " + member.user.username);
-		keywordPost(channelGen, "welcome", "all", member.user);
-	}
-	catch(err)
-	{
-		//channelGen.sendMessage("Oh, I tried to welcome a new member but something went wrong!");
-		consoleLog("I tried to welcome a new member but something went wrong! "+err);
-	}
+    try
+    {
+        consoleLog("Attempting to welcome new member " + member.user.username);
+        keywordPost(channelGen, "welcome", "all", member.user);
+    }
+    catch(err)
+    {
+        //channelGen.sendMessage("Oh, I tried to welcome a new member but something went wrong!");
+        consoleLog("I tried to welcome a new member but something went wrong! "+err);
+    }
 });
 
 
