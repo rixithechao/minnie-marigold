@@ -306,14 +306,15 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 			messageQueues[args.channel] = new Array(0);
 		let queue = messageQueues[args.channel];
 
+		// Initialize the sequence level here
+		if (args.sequenceLevel == null)
+			args.sequenceLevel = 0;
+
 		// Only post if there is no active sequence in this channel or this is part of the active sequence
 		if (!activeSequences[args.channel]  ||  args.sequenceLevel > 0)
 		{
 			if (args.msg == null  ||  args.msg == undefined)
 				args.msg = "If you're seeing this message it means rocky screwed something up again!";
-
-			if (args.sequenceLevel == null)
-				args.sequenceLevel = 0;
 
 			let currentMsg = "";
 
@@ -378,13 +379,12 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 
 
 			// Make the post(s)
-			//args.channel.startTyping(args.sequenceLevel);
+			args.channel.startTyping();
 			setTimeout(function ()
 			{
 				setTimeout(function ()
 				{
 					consoleLog("SENDING MESSAGE: " + currentMsg);
-					//args.channel.stopTyping();
 					args.channel.send(currentMsg, {split: true /*tts:(ttsActive==true)*/}).catch(msgSendError);
 
 					// If the post was split, continue the sequence
@@ -403,6 +403,7 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 					// Otherwise, free the channel...
 					else
 					{
+						args.channel.stopTyping();
 						activeSequences[args.channel] = false;
 
 						// ...and begin posting any queued messages
