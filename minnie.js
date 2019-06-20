@@ -403,7 +403,7 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 					// Otherwise, free the channel...
 					else
 					{
-						args.channel.stopTyping();
+						args.channel.stopTyping(true);
 						activeSequences[args.channel] = false;
 
 						// ...and begin posting any queued messages
