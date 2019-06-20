@@ -3,7 +3,7 @@
 		"category": "general",
 		"phrases": {
 			"all": [
-				"Hi, <mention>! Welcome to the codehaus of code where <phrase welcometemp>"
+				"Hi, <mention>! Welcome to the codehaus of code where <phrase welcometemp>! Please give the #rules channel a thorough read before posting and check #announcements for any recent news about SMBX2 and the server."
 			]
 		}
 	},
