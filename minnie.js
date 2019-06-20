@@ -338,7 +338,7 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 			// Apply non-phrase replacements
 			if (currentMsg.includes("<mention>"))
 			{
-				currentMsg = currentMsg.replace(/<mention>/gi, (args.userToMention != null) ? /*"@" + args.userToMention.username + "#" + args.userToMention.discriminator*/ args.userToMention.toString() + " " : "@NOBODY-IN-PARTICULAR");
+				currentMsg = currentMsg.replace(/<mention>/gi, (args.userToMention != null) ? /*"@" + args.userToMention.username + "#" + args.userToMention.discriminator*/ args.userToMention.toString() : "@NOBODY-IN-PARTICULAR");
 			}
 			if (currentMsg.includes("<servername>"))
 			{

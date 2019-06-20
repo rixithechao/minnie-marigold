@@ -20,6 +20,7 @@
 				"All instances of the <mention> tag in a response will be replaced with a mention of a user;  the user depends on the command's function.",
 				"All instances of the <servername> tag in a response will be replaced with the server's name.",
 				"All instances of the <phrase commandname> in a response will be replaced with a randomly-selected phrase from that command.",
+				"All instances of <#channelidnumber> in a response will be replaced with that channel's name.",
 				"The <page> tag breaks up a response into multiple posts."
 			]
 		}

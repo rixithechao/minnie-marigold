@@ -3,11 +3,12 @@
 		"category": "general",
 		"phrases": {
 			"all": [
-				"Hi, <mention>! Welcome to the codehaus of code where <phrase welcometemp>! Please give the #rules channel a thorough read before posting and check #announcements for any recent news about SMBX2 and the server."
+				"Hi, <mention>! Welcome to the codehaus of code where <phrase welcometemp>!  Please give the <#216474379578507268> channel a thorough read before posting and check <#268149935088730113> for any recent news about SMBX2 and the server."
 			]
 		}
 	},
 	"welcometemp": {
+		"noRepeats" : "true",
 		"phrases": {
 			"all": [
 				"we talk about <phrase welcometopic>",
