@@ -293,7 +293,7 @@ function updateRegex()
 }
 
 
-function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, userToMention, mustSend)
+function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, userToMention, mustSend, isCodeBlock)
 {
     if (args.msg == null  ||  args.msg == undefined)
         args.msg = "If you're seeing this message it means rocky screwed something up again!";
@@ -308,8 +308,9 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
         currentMsg = "```\n";
     currentMsg += args.msg;
 
+    // Break at the page tag, but only if not posting code blocks
     let nextMsg = "";
-    if (currentMsg.includes("<page>"))
+    if (currentMsg.includes("<page>") && args.isCodeBlock != true)
     {
         currentMsg = args.msg.substring(0, args.msg.indexOf('<page>'));
         nextMsg = args.msg.substring(args.msg.indexOf('<page>') + 6);
@@ -317,20 +318,38 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
         if (args.sequenceLevel === 0)
             firstOfSequence = true;
     }
+
+    // Apply non-phrase replacements
     if (currentMsg.includes("<mention>"))
     {
-        currentMsg = currentMsg.replace(/<mention>/gi, (args.userToMention != null) ? "@" + args.userToMention.username + "#" + args.userToMention.discriminator + " " : "@NOBODY IN PARTICULAR");
+        currentMsg = currentMsg.replace(/<mention>/gi, (args.userToMention != null) ? /*"@" + args.userToMention.username + "#" + args.userToMention.discriminator*/ args.userToMention.toString() + " " : "@NOBODY-IN-PARTICULAR");
     }
     if (currentMsg.includes("<servername>"))
     {
         currentMsg = currentMsg.replace(/<servername>/gi, (args.channel != null  &&  args.channel.guild != null) ? args.channel.guild.name : "UNKNOWN GUILD");
     }
 
+    // If the entire post is a code block, split it where necessary and end the block
     if (args.isCodeBlock === true)
     {
+        if (currentMsg.length > 1990)
+        {
+            let lastBreak = args.msg.substring(0, 1990).lastIndexOf('\n');
+            if (lastBreak > 0)
+            {
+                nextMsg = args.msg.substring(lastBreak+1);
+                currentMsg = args.msg.substring(0, lastBreak);
+            }
+            else
+            {
+                nextMsg = args.msg.substring(0, 1990);
+                currentMsg = args.msg.substring(1990);
+            }
+        }
         currentMsg += "\n```";
     }
 
+    // Determing the time to spend typing
     if (args.waitRange == null)
         args.waitRange = 1;
 
@@ -339,6 +358,9 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 
     let totalTypingTime = Math.min(args.msg.length, 200) * (Math.random() * args.waitRange) * 15 + args.extraPause;
 
+
+    // Make the post(s)
+    args.channel.startTyping(args.sequenceLevel);
     setTimeout(function ()
     {
         setTimeout(function ()
@@ -347,6 +369,7 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
             if (/*!quietMode  &&  */(!args.midSequence || args.sequenceLevel > 0 || firstOfSequence))
             {
                 consoleLog("SENDING MESSAGE: " + currentMsg);
+                args.channel.stopTyping();
                 args.channel.send(currentMsg, {split: true /*tts:(ttsActive==true)*/}).catch(msgSendError);
                 if (nextMsg !== "")
                 {
