@@ -379,7 +379,8 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 
 
 			// Make the post(s)
-			args.channel.startTyping();
+			if  (typeof args.channel.startTyping === "function")
+				args.channel.startTyping();
 			setTimeout(function ()
 			{
 				setTimeout(function ()
@@ -403,7 +404,8 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 					// Otherwise, free the channel...
 					else
 					{
-						args.channel.stopTyping(true);
+						if  (typeof args.channel.stopTyping === "function")
+							args.channel.stopTyping(true);
 						activeSequences[args.channel] = false;
 
 						// ...and begin posting any queued messages
