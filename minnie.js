@@ -301,8 +301,8 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 	// Only bother with all of this stuff if a valid channel reference is supplied
 	if (args.channel != null)
 	{
-		// Let's just initialize the message queue for this channel here
-		if (messageQueues[args.channel] == null)
+		// If this is a guildchannel, let's initialize the message queue for it here
+		if (args.channel.guild != null  &&  messageQueues[args.channel] == null)
 			messageQueues[args.channel] = new Array(0);
 		let queue = messageQueues[args.channel];
 
@@ -407,7 +407,7 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 						activeSequences[args.channel] = false;
 
 						// ...and begin posting any queued messages
-						if (queue.length > 0)
+						if (queue != null  &&  queue.length > 0)
 						{
 							let nextArgs = queue.shift();
 							sendMsg(nextArgs);
@@ -423,8 +423,15 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 		// If currently mid-sequence, queue the message
 		else
 		{
-			queue.push(args);
-			consoleLog("sendMsg was called for a channel I'm currently posting a sequence in, so the call's been queued.");
+			if (queue != null)
+			{
+				queue.push(args);
+				consoleLog("sendMsg was called for a channel I'm currently posting a sequence in, so the call's been queued.");
+			}
+			else
+			{
+				consoleLog("Huh... I need to queue this message but for some reason I can't.");
+			}
 
 			return -1;
 		}
@@ -875,9 +882,19 @@ cmdFuncts.setGame = function (msg, cmdStr, argStr, props)
 
 cmdFuncts.postLogs = function (msg, cmdStr, argStr, props)
 {
+    sendMsg({
+        channel: msg.channel,
+        msg: "Sure thing, just give me a moment..."
+    });
+
+    let targetChannel = msg.channel;
     let lineCount = 10;
     if  (argStr !== "")
+    {
         lineCount = Number(argStr);
+        if (lineCount > 20)
+            targetChannel = msg.member.user;
+    }
 
     if (logBackup.length > 0)
     {
@@ -888,7 +905,7 @@ cmdFuncts.postLogs = function (msg, cmdStr, argStr, props)
         }
 
         sendMsg({
-            channel: msg.member.user,
+            channel: targetChannel,
             msg: comboString,
             isCodeBlock: true
         });

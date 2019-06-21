@@ -11,7 +11,7 @@
 		"noRepeats" : "true",
 		"phrases": {
 			"all": [
-				"we talk about <phrase welcometopic>",
+				"we talk about welcoming people to the codehaus of code where we welcome people to the codehaus of code with our standard greeting that goes 'welcome to the codehaus of code' followed by other stuff",
 				"we talk about <phrase welcometopic> and <phrase welcometopic>",
 				"we talk about <phrase welcometopic> and also <phrase welcometopic>",
 				"we talk about <phrase welcometopic> and <phrase welcometopic>, and sometimes <phrase welcometopic>",
@@ -71,7 +71,6 @@
 				"that one time a thing happened",
 				"the secret of evolution",
 				"the meaning of life",
-				"welcoming people to the codehaus of code where we welcome people to the codehaus of code with our standard greeting that goes 'welcome to the codehaus of code' followed by other stuff",
 				"non-sequitur greetings",
 				"how extremely dated some of the randomly-selected items for this welcome message are",
 				"how there are too many bots in this server"
