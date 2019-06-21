@@ -891,7 +891,7 @@ cmdFuncts.postLogs = function (msg, cmdStr, argStr, props)
     if  (argStr !== "")
     {
         lineCount = Number(argStr);
-        if (lineCount > 20)
+        if (lineCount > 10)
             targetChannel = msg.member.user;
     }
 
