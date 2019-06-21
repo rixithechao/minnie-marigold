@@ -318,8 +318,8 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 
 			let currentMsg = "";
 
-			if  (args.isCodeBlock === true)
-				currentMsg = "```\n";
+			//if  (args.isCodeBlock === true)
+			//	currentMsg = "```\n";
 			currentMsg += args.msg;
 
 
@@ -345,28 +345,25 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 				currentMsg = currentMsg.replace(/<servername>/gi, (args.channel != null  &&  args.channel.guild != null) ? args.channel.guild.name : "UNKNOWN GUILD");
 			}
 
-			// If the entire post is a code block, split it where necessary and end the block
-			if (args.isCodeBlock === true)
+			// If the post exceeds the character limit before a page break, split it where necessary
+			if (currentMsg.length > 1990)
 			{
-				if (currentMsg.length > 1990)
+				let tempNext = nextMsg
+				let earlierSplitStr = ""
+				let lastBreakPos = currentMsg.substring(0, 1990).lastIndexOf('\n');
+				if (lastBreakPos > 0)
 				{
-					let tempNext = nextMsg
-					let earlierSplitStr = ""
-					let lastBreakPos = args.msg.substring(0, 1990).lastIndexOf('\n');
-					if (lastBreakPos > 0)
-					{
-						earlierSplitStr = args.msg.substring(lastBreakPos+1);
-						currentMsg = args.msg.substring(0, lastBreakPos);
-					}
-					else
-					{
-						earlierSplitStr = args.msg.substring(0, 1990);
-						currentMsg = args.msg.substring(1990);
-					}
-					nextMsg = earlierSplitStr + tempNext
+					earlierSplitStr = currentMsg.substring(lastBreakPos+1);
+					currentMsg = currentMsg.substring(0, lastBreakPos);
 				}
-				currentMsg += "\n```";
+				else
+				{
+					earlierSplitStr = currentMsg.substring(1990);
+					currentMsg = currentMsg.substring(0, 1990);
+				}
+				nextMsg = earlierSplitStr + tempNext
 			}
+
 
 			// Determing the time to spend typing
 			if (args.waitRange == null)
@@ -386,7 +383,7 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 				setTimeout(function ()
 				{
 					consoleLog("SENDING MESSAGE: " + currentMsg);
-					args.channel.send(currentMsg, {split: true /*tts:(ttsActive==true)*/}).catch(msgSendError);
+					args.channel.send(currentMsg, {split: true, code: args.isCodeBlock /*tts:(ttsActive==true)*/}).catch(msgSendError);
 
 					// If the post was split, continue the sequence
 					if (nextMsg !== "")
