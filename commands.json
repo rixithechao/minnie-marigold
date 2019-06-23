@@ -8,6 +8,7 @@
 		"auth": "if this field is defined at all, only owner, server mods, and whitelisted users can use the command;  specify a group name defined in config.json's authIds to whitelist those members",
 		"cooldown": "cooldown before a given command can be reused by the same person",
 		"regex": "if this field is defined, the command can be initiated whenever a match is detected in other users' posts (generally don't use this with Minnie, okay?)",
+		"clean": "if this field is defined and the command uses the text from the prompting message in any way, it will apply cleanContent filtration.",
 		"phrases": {
 			"all": [
 				"a table of possible responses",
@@ -194,6 +195,12 @@
 
 
 
+	"welcomechannel": {
+		"category": "mod-only",
+		"info": "Sets the welcome channel to the one this command is posted in (and toggles them off if already set to the current channel.)",
+		"function": "setWelcomeChannel",
+		"auth": "owner"
+	},
 
 	"logs": {
 		"category": "mod-only",
@@ -665,7 +672,7 @@
 		"auth": "say",
 		"info": "Forces me to say stuff.  Use common sense with this command.",
 		"function": "forceSay",
-		"clean": true
+		"clean": "true"
 	},
 
 	"reveal": {

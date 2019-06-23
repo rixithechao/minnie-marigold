@@ -117,11 +117,17 @@ function setChannelAllowed(channel, isAllowed)
     let chId = channel.id.toString();
     channelsAllowed[chId] = isAllowed;
     serverdata[channel.guild.id].channelsAllowed = channelsAllowed;
+    updateServerData(channel.guild);
 }
 
 function getChannelByName(guild, channelName)
 {
     return guild.channels.find("name", channelName);
+}
+
+function getChannelByID(id)
+{
+    return client.channels.get(id);
 }
 
 let msgFailedAttempts = 0;
@@ -567,6 +573,24 @@ cmdFuncts.toggleTTS = function (msg, cmdStr, argStr, props)
         ttsActive = false;
         sendMsg({channel: msg.channel, msg: "[Text to speech disabled]"});
     }
+};
+
+cmdFuncts.setWelcomeChannel = function (msg, cmdStr, argStr, props)
+{
+	let guildId = msg.guild.id;
+	let channelId = msg.channel.id.toString();
+	if (serverdata[guildId].welcomeChannel === channelId)
+	{
+		sendMsg({channel: msg.channel, msg: "No problem, let me know if you need me to start welcoming people again!"});
+		serverdata[guildId].welcomeChannel = null;
+	}
+	else
+	{
+		sendMsg({channel: msg.channel, msg: "Gotcha, I'll welcome folks in here from now on!"});
+		serverdata[guildId].welcomeChannel = channelId;
+	}
+
+	updateServerData(msg.channel.guild);
 };
 
 /*
@@ -1456,13 +1480,13 @@ client.on("message", msg =>
 *  WELCOME                                    *
 **********************************************/
 client.on("guildMemberAdd", member => {
-    let channelGen = member.guild.defaultChannel;
+    let channel = getChannelByID(serverdata[member.guild.id].welcomeChannel); //member.guild.defaultChannel;
     //let channelBoop = client.channels.find('name', 'beep-boop');
 
     try
     {
         consoleLog("Attempting to welcome new member " + member.user.username);
-        keywordPost(channelGen, "welcome", "all", member.user);
+        keywordPost(channel, "welcome", "all", member.user);
     }
     catch(err)
     {
