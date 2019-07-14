@@ -239,7 +239,7 @@ function updateServerData(guild)
     // Channel data
     guild.channels.forEach(channel =>
     {
-        if (channel != null && channel.type == "text")
+        if (channel != null && channel.type === "text")
         {
             consoleLog("UPDATING SERVER'S CHANNEL DATA: " + channel.id.toString() + "(" + channel.name + ")");
 
@@ -319,7 +319,7 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 		// Only post if there is no active sequence in this channel or this is part of the active sequence
 		if (!activeSequences[args.channel]  ||  args.sequenceLevel > 0)
 		{
-			if (args.msg == null  ||  args.msg == undefined)
+			if (args.msg == null  ||  args.msg === undefined)
 				args.msg = "If you're seeing this message it means rocky screwed something up again!";
 
 			let currentMsg = "";
@@ -354,8 +354,8 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 			// If the post exceeds the character limit before a page break, split it where necessary
 			if (currentMsg.length > 1990)
 			{
-				let tempNext = nextMsg
-				let earlierSplitStr = ""
+				let tempNext = nextMsg;
+				let earlierSplitStr = "";
 				let lastBreakPos = currentMsg.substring(0, 1990).lastIndexOf('\n');
 				if (lastBreakPos > 0)
 				{
@@ -451,11 +451,11 @@ function sendMsg(args) //channel, msg, waitRange, extraPause, sequenceLevel, use
 }
 
 
-let phraseSetsShuffled = {}
+let phraseSetsShuffled = {};
 function keywordPost(channel, keyword, category, user)
 {
-    phraseSetsShuffled = {}
-    let postText = getPhraseRandom(keyword, category, ((commands[keyword].noRepeats) == true));
+    phraseSetsShuffled = {};
+    let postText = getPhraseRandom(keyword, category, ((commands[keyword].noRepeats) === true));
     sendMsg({channel: channel, msg: postText, userToMention: user})
 }
 
@@ -476,16 +476,16 @@ function getPhraseRandom(keyword, category, shuffle)
         consoleLog("Getting random phrase: keyword=" + keyword + ", category=" + category);
 
         // Get the randomized phrase
-        let postText = ""
+        let postText = "";
 
         // New option for randomization to prevent repeats: shuffle the array, then step through it index by index
-        if (shuffle == true)
+        if (shuffle === true)
         {
-            if (phraseSetsShuffled[keyword] = null)
+            if (phraseSetsShuffled[keyword] == null)
                 phraseSetsShuffled[keyword] = {};
 
             let selectedIndex = phraseSetsShuffled[keyword][category];
-            if (selectedIndex == null  ||  selectedIndex == phraseArray.length-1)
+            if (selectedIndex == null  ||  selectedIndex === (phraseArray.length - 1))
             {
                 phraseSetsShuffled[keyword][category] = 0;
                 selectedIndex = 0;
@@ -507,7 +507,7 @@ function getPhraseRandom(keyword, category, shuffle)
         let newPostText = postText.replace(/<phrase [^\s]+>/gi, function (x)
         {
             let slice = x.slice(8, -1);
-            let replText = getPhraseRandom(slice, null, ((commands[keyword].noRepeats) == true));
+            let replText = getPhraseRandom(slice, null, ((commands[keyword].noRepeats) === true));
             try {consoleLog("Slice = " + slice + ", Replacement made: " + replText)} catch (err) {consoleLog("either replText or slice is null or undefined: " + err)};
             return replText
         });
@@ -679,7 +679,7 @@ function updatePoll (args) //id, channel, post, deadline, options
 
 function startPoll(id)
 {
-    
+
 }
 
 
@@ -735,7 +735,7 @@ cmdFuncts.getJson = function (msg, cmdStr, argStr, props)
     msg.member.user.send("Attempting to send the data...");
     msg.member.user.send(new Discord.Attachment('./serverdata.json', 'serverdata.json')).catch(msgSendError);
     msg.member.user.send(new Discord.Attachment('./userdata.json', 'userdata.json')).catch(msgSendError);
-}
+};
 
 
 
@@ -935,7 +935,7 @@ cmdFuncts.postLogs = function (msg, cmdStr, argStr, props)
     }
     else
         sendMsg({channel: msg.channel, msg: "Oh my, it doesn't look like anything was logged!  That's probably not good..."});
-}
+};
 
 cmdFuncts.revealSay = function (msg, cmdStr, argStr, props)
 {
@@ -1048,7 +1048,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 
         if (newProps != null)
         {
-            
+
             let authStr = newProps.auth;
             if (authStr == null)
                 authStr = "everyone";
