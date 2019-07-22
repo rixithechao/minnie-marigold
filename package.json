@@ -6,12 +6,8 @@
     "author": "",
     "license": "Apache-2.0",
     "dependencies": {
-        "bufferutil": "^3.0.5",
         "discord.js": "^11.5.1",
-        "node-opus": "^0.2.9",
-        "opusscript": "0.0.6",
         "sd-notify": "^2.7.2",
-        "sodium": "^3.0.2",
         "uws": "^9.148.0"
     },
     "repository": {
