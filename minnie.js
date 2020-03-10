@@ -237,7 +237,7 @@ function updateServerData(guild)
     }
 
     // Channel data
-    guild.channels.forEach(channel =>
+    guild.channels.cache.forEach(channel =>
     {
         if (channel != null && channel.type === "text")
         {
@@ -1211,7 +1211,7 @@ client.on("message", msg =>
                 consoleLog("[unknown] said: " + msg.cleanContent);
 
             // Authority check
-            let authorized = ((ownerIds.indexOf(msg.author.id) !== -1) || (msg.member && msg.member.roles.has(modRoleId)));
+            let authorized = ((ownerIds.indexOf(msg.author.id) !== -1) || (msg.member && msg.member.roles.cache.has(modRoleId)));
             let authordata = userdata[msg.author.id];
             if (authordata != null)
             {
@@ -1511,7 +1511,7 @@ client.on('ready', () =>
 
     client.user.setStatus("online").catch(msgSendError);
     client.user.setActivity("with the arcane energies that govern our world!").catch(msgSendError);
-    let myGuild = client.guilds.get(startingGuildId);
+    let myGuild = client.guilds.resolve(startingGuildId);
     if(!myGuild)
     {
         let perms = 130112;
@@ -1520,7 +1520,7 @@ client.on('ready', () =>
         return;
     }
 
-    let myChannel = myGuild.channels.get(startingChannelId);
+    let myChannel = myGuild.channels.resolve(startingChannelId);
     if(!myChannel)
     {
         consoleLog("I don't know this channel! IT'S NONSENSE!");
