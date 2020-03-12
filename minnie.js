@@ -116,7 +116,7 @@ function setChannelAllowed(channel, isAllowed)
 {
     let chId = channel.id.toString();
     channelsAllowed[chId] = isAllowed;
-    
+
     if (isAllowed)
         consoleLog("Enabled posting in channel " + chId);
     else
@@ -739,8 +739,8 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 cmdFuncts.getJson = function (msg, cmdStr, argStr, props)
 {
     msg.member.user.send("Attempting to send the data...");
-    msg.member.user.send(new Discord.Attachment('./serverdata.json', 'serverdata.json')).catch(msgSendError);
-    msg.member.user.send(new Discord.Attachment('./userdata.json', 'userdata.json')).catch(msgSendError);
+    msg.member.user.send({files: [{attachment: './serverdata.json', name: 'serverdata.json'}]}).catch(msgSendError);
+    msg.member.user.send({files: [{attachment: './userdata.json', name: 'userdata.json'}]}).catch(msgSendError);
 };
 
 
