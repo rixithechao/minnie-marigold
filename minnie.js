@@ -116,6 +116,12 @@ function setChannelAllowed(channel, isAllowed)
 {
     let chId = channel.id.toString();
     channelsAllowed[chId] = isAllowed;
+    
+    if (isAllowed)
+        consoleLog("Enabled posting in channel " + chId);
+    else
+        consoleLog("Disabled posting in channel " + chId);
+
     serverdata[channel.guild.id].channelsAllowed = channelsAllowed;
     updateServerData(channel.guild);
 }
